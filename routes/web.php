@@ -22,3 +22,7 @@ Route::get('/{brand}/rundown', 'Home@rundown')->name('rundown');
 
 Route::get('/{brand}/lineUp', 'LineUp@index')->name('lineUp');
 Route::get('/{brand}/lineUp/{detail}', 'LineUp@detail')->name('lineUpDetail');
+
+Route::get('/{brand}/lineUp/{detail}/interiorExterior', 'LineUp@interiorExterior')->name('interiorExterior');
+Route::get('/{brand}/lineUp/{detail}/testDrive', 'LineUp@testDrive')->name('testDrive');
+Route::get('/{brand}/lineUp/{detail}/penawaran', 'LineUp@penawaran')->name('penawaran');

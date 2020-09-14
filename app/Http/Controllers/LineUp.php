@@ -23,9 +23,32 @@ class LineUp extends Backend
     }
     public function detail($brand, $detail)
     {
-        // $sectionTitle = "Line Up " . ucwords(request()->segment(1));
         $backgroundImage = "hero-bg.jpg";
         return view('pages.lineUp.detail', [
+            'sectionTitle' => $detail,
+            'backgroundImage' => $backgroundImage
+        ]);
+    }
+    public function interiorExterior($brand, $detail)
+    {
+        $backgroundImage = "hero-bg.jpg";
+        return view('pages.lineUp.interiorExterior', [
+            'sectionTitle' => $detail,
+            'backgroundImage' => $backgroundImage
+        ]);
+    }
+    public function testDrive($brand, $detail)
+    {
+        $backgroundImage = "hero-bg.jpg";
+        return view('pages.lineUp.testDrive', [
+            'sectionTitle' => $detail,
+            'backgroundImage' => $backgroundImage
+        ]);
+    }
+    public function penawaran($brand, $detail)
+    {
+        $backgroundImage = "hero-bg.jpg";
+        return view('pages.lineUp.penawaran', [
             'sectionTitle' => $detail,
             'backgroundImage' => $backgroundImage
         ]);

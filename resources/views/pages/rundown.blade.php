@@ -48,7 +48,7 @@
 @section('content')
 <div id="main">
     <section id="resume" class="resume">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="section-title">
                 <h2>{{$sectionTitle}}</h2>
             </div>

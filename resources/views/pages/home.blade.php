@@ -44,12 +44,12 @@
 @section('content')
 <div id="main">
     <section id="resume" class="resume portfolio">
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="section-title">
                 <h2>Kumala Virtual Fair</h2>
             </div>
 
-            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="row portfolio-container" data-aos="zoom-in" data-aos-delay="100">
 
                 <div class="col-lg-4 col-md-6 portfolio-item">
                     <div class="portfolio-wrap zoom_img py-4" style="background-color: transparent;">
