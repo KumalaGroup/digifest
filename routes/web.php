@@ -13,16 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/masuk', 'Login@index')->name('login');
-Route::get('/daftar', 'Login@daftar')->name('daftar');
+//Route Admin
+Route::get('/back/masuk', 'Admin\Login@index')->name('loginAdmin');
 
-Route::get('/', 'Home@index')->name('home');
-Route::get('/{brand}', 'Home@mainStage')->name('mainStage');
-Route::get('/{brand}/rundown', 'Home@rundown')->name('rundown');
+Route::get('/back', 'Admin\Home@index')->name('homeAdmin');
 
-Route::get('/{brand}/lineUp', 'LineUp@index')->name('lineUp');
-Route::get('/{brand}/lineUp/{detail}', 'LineUp@detail')->name('lineUpDetail');
 
-Route::get('/{brand}/lineUp/{detail}/interiorExterior', 'LineUp@interiorExterior')->name('interiorExterior');
-Route::get('/{brand}/lineUp/{detail}/testDrive', 'LineUp@testDrive')->name('testDrive');
-Route::get('/{brand}/lineUp/{detail}/penawaran', 'LineUp@penawaran')->name('penawaran');
+Route::get('/masuk', 'User\Login@index')->name('login');
+Route::get('/daftar', 'User\Login@daftar')->name('daftar');
+
+Route::get('/', 'User\Home@index')->name('home');
+Route::get('/{brand}', 'User\Home@mainStage')->name('mainStage');
+Route::get('/{brand}/rundown', 'User\Home@rundown')->name('rundown');
+
+Route::get('/{brand}/lineUp', 'User\LineUp@index')->name('lineUp');
+Route::get('/{brand}/lineUp/{detail}', 'User\LineUp@detail')->name('lineUpDetail');
+
+Route::get('/{brand}/lineUp/{detail}/interiorExterior', 'User\LineUp@interiorExterior')->name('interiorExterior');
+Route::get('/{brand}/lineUp/{detail}/testDrive', 'User\LineUp@testDrive')->name('testDrive');
+Route::get('/{brand}/lineUp/{detail}/penawaran', 'User\LineUp@penawaran')->name('penawaran');

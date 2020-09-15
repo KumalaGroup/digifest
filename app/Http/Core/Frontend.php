@@ -8,9 +8,9 @@ class Frontend extends Controller
     {
         $this->_cekSession();
     }
-    function _cekSession()
+    function _cekSession($role = false)
     {
-        if (session('loggedIn'))
-            return redirect()->route('home')->send();
+        if (session('loggedIn') && $role == "isAdmin") return redirect()->route('homeAdmin')->send();
+        elseif (session('loggedIn')) return redirect()->route('home')->send();
     }
 }

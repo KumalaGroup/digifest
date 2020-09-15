@@ -2,18 +2,16 @@
 
 namespace App\Http\Core;
 
-use Illuminate\Http\Request;
-
 class Backend extends Controller
 {
     public function __construct()
     {
         // $this->_cekSession();
     }
-    function _cekSession()
+    function _cekSession($role = false)
     {
-        if (!session('loggedIn'))
-            return redirect()->route('login')->send();
+        if (!session('loggedIn') && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
+        elseif (!session('loggedIn')) return redirect()->route('login')->send();
     }
     function _cekRoute()
     {
