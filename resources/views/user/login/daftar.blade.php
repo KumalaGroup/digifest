@@ -48,6 +48,7 @@
                         <h2>Daftar</h2>
                     </div>
                     <form id="form" class="php-email-form" style="background-color: transparent;">
+                        @csrf
                         <div class="form-group mb-1">
                             <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" required />
                         </div>
@@ -58,10 +59,10 @@
                             <input type="text" class="form-control" name="telepon" id="telepon" placeholder="No. Telepon" required />
                         </div>
                         <div class="form-group mb-1">
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required minlength="6" />
                         </div>
                         <div class="form-group mb-1">
-                            <input type="password" name="re_password" class="form-control" id="re_password" placeholder="Ulangi Password" required />
+                            <input type="password" name="rePassword" class="form-control" id="rePassword" placeholder="Ulangi Password" required minlength="6" />
                         </div>
                         <div class="text-center mt-4"><button id="submit" class="btn_round btn-block">Daftar</button></div>
                     </form>
@@ -76,7 +77,18 @@
 <script>
     $('#submit').click(function(e) {
         e.preventDefault();
-        $('#form').valid();
+        if ($('#password').val() != $('#rePassword').val()) {
+            alert("Password tidak sama")
+            return false;
+        }
+        var form = $('#form');
+        var data = form.serialize();
+        if (form.valid())
+            $.post(location, data,
+                function(data, textStatus, jqXHR) {
+                    alert(data.msg);
+                    if (data.status == "success") location.replace("{{route('login')}}");
+                }, "json");
     });
 </script>
 @endsection

@@ -47,6 +47,7 @@
                         <h2>Masuk</h2>
                     </div>
                     <form id="form" class="php-email-form" style="background-color: transparent;">
+                        @csrf
                         <div class="form-group mb-1">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required />
                         </div>
@@ -67,7 +68,14 @@
 <script>
     $('#submit').click(function(e) {
         e.preventDefault();
-        $('#form').valid();
+        var form = $('#form');
+        var data = form.serialize();
+        if ($('#form').valid())
+            $.post(location, data,
+                function(data, textStatus, jqXHR) {
+                    if (data.status == "success") location.reload();
+                    else alert(data.msg);
+                }, "json");
     });
 </script>
 @endsection

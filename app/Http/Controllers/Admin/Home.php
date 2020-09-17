@@ -9,7 +9,7 @@ class Home extends Backend
 {
     public function __construct()
     {
-        // parent::_cekSession("isAdmin");
+        parent::_cekSession("isAdmin");
     }
     public function index()
     {

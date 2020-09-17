@@ -58,13 +58,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<h1> <a class="navbar-brand" href="index.html">Admin</a></h1>
+				<h1> <a class="navbar-brand" href="{{route('homeAdmin')}}">Admin</a></h1>
 			</div>
 			<div class=" border-bottom">
 				<div class="full-left">
 					<section class="full-top">
 						<button id="toggle"><i class="fa fa-arrows-alt"></i></button>
 					</section>
+					<form class=" navbar-left-right">
+						<input type="text" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
+						<input type="submit" value="" class="fa fa-search">
+					</form>
 					<div class="clearfix"> </div>
 				</div>
 				@include('admin.components.notifikasi')
@@ -73,16 +77,12 @@
 			</div>
 		</nav>
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-			<div class="content-main">@yield('content')</div>
+			<div class="content-main">
+				@yield('content')
+			</div>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
-	<!--scrolling js-->
-	<script src="{{asset('admin/js/jquery.nicescroll.js')}}"></script>
-	<script src="{{asset('admin/js/scripts.js')}}"></script>
-	<!--//scrolling js-->
-	<!---->
-
 </body>
 
 </html>

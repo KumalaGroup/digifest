@@ -2,11 +2,16 @@
 
 namespace App\Http\Core;
 
+use Closure;
+
 class Backend extends Controller
 {
     public function __construct()
     {
-        // $this->_cekSession();
+        $this->middleware(function ($request, Closure $next) {
+            $this->_cekSession();
+            return $next($request);
+        });
     }
     function _cekSession($role = false)
     {
@@ -16,7 +21,7 @@ class Backend extends Controller
     function _cekRoute()
     {
         $brand = request()->segment(1);
-        if (isset($brand) && !in_array($brand, ["wuling", "hino", "mercedes", "honda", "mazda"]))
+        if (isset($brand) && !in_array($brand, ["wuling", "hino", "mercedes", "honda", "mazda", "keluar"]))
             return abort(404);
     }
 }

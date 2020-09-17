@@ -37,4 +37,9 @@ class Home extends Backend
             'backgroundImage' => $backgroundImage
         ]);
     }
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->route('login');
+    }
 }

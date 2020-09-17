@@ -2,11 +2,16 @@
 
 namespace App\Http\Core;
 
+use Closure;
+
 class Frontend extends Controller
 {
     public function __construct()
     {
-        $this->_cekSession();
+        $this->middleware(function ($request, Closure $next) {
+            $this->_cekSession();
+            return $next($request);
+        });
     }
     function _cekSession($role = false)
     {
