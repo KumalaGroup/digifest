@@ -31,6 +31,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         html {
             zoom: 90%;
         }
+
+        .error {
+            color: #d95459;
+            font-weight: 300;
+            padding-top: 5px;
+            padding-left: 5px;
+            margin: 0;
+            font-size: 10pt;
+        }
     </style>
 </head>
 
@@ -39,18 +48,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <h1><a href="javascript:void(0)">Admin</a></h1>
         <div class="login-bottom">
             <h2>Masuk</h2>
-            <form>
+            <form id="form">
+                @csrf
                 <div class=" col-md-12 login-do">
                     <div class="login-mail" style="margin-bottom: 15px;">
-                        <input type="text" placeholder="Email" required="">
-                        <i class="fa  fa-fw fa-envelope"></i>
+                        <i class="fa  fa-fw fa-user"></i>
+                        <input type="text" placeholder="Username" name="username" required>
                     </div>
                     <div class="login-mail">
-                        <input type="password" placeholder="Password" required="">
                         <i class="fa fa-fw fa-lock"></i>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <label class="hvr-shutter-in-horizontal login-sub">
-                        <input type="submit" value="Masuk">
+                        <input id="submit" type="submit" value="Masuk">
                     </label>
                 </div>
                 <div class="clearfix"> </div>
@@ -63,11 +73,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 document.write(new Date().getFullYear())
             </script> Kumala Group. All Rights Reserved | Develop by IT Kumala Group</p>
     </div>
-    <!---->
-    <!--scrolling js-->
-    <script src="{{asset('admin/js/jquery.nicescroll.js')}}"></script>
-    <script src="{{asset('admin/js/scripts.js')}}"></script>
-    <!--//scrolling js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+    <script>
+        $('#submit').click(function(e) {
+            e.preventDefault();
+            var form = $('#form');
+            var data = form.serialize();
+            if ($('#form').valid())
+                $.post(location, data,
+                    function(data, textStatus, jqXHR) {
+                        if (data.status == "success") location.reload();
+                        else alert(data.msg);
+                    }, "json");
+        });
+    </script>
 </body>
 
 </html>

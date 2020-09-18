@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route Admin
-Route::get('/back/masuk', 'Admin\Login@index')->name('loginAdmin');
+Route::match(['get', 'post'], '/back/masuk', 'Admin\Login@index')->name('loginAdmin');
 
 Route::get('/back', 'Admin\Home@index')->name('homeAdmin');
 

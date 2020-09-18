@@ -15,8 +15,11 @@ class Backend extends Controller
     }
     function _cekSession($role = false)
     {
-        if (!session('loggedIn') && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
-        elseif (!session('loggedIn')) return redirect()->route('login')->send();
+        $loggedIn = session('loggedIn');
+        if (!$loggedIn && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
+        elseif (!$loggedIn) return redirect()->route('login')->send();
+        elseif ($loggedIn && $loggedIn == "BackAdmin" && $role == false) return redirect()->route('login')->send();
+        elseif ($loggedIn && $loggedIn == "FrontUser" && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
     }
     function _cekRoute()
     {

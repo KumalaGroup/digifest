@@ -64,7 +64,8 @@
                         <div class="form-group mb-1">
                             <input type="password" name="rePassword" class="form-control" id="rePassword" placeholder="Ulangi Password" required minlength="6" />
                         </div>
-                        <div class="text-center mt-4"><button id="submit" class="btn_round btn-block">Daftar</button></div>
+                        <div class="text-center mt-4 mb-4"><button id="submit" class="btn_round btn-block">Daftar</button></div>
+                        <p class="text-center">Sudah punya akun? <a href="{{route('login')}}"><strong>Masuk</strong></a></p>
                     </form>
                 </div>
             </div>
@@ -83,12 +84,15 @@
         }
         var form = $('#form');
         var data = form.serialize();
-        if (form.valid())
+        if (form.valid()) {
+            $(this).prop('disabled', true);
             $.post(location, data,
                 function(data, textStatus, jqXHR) {
+                    $('#submit').prop('disabled', false);
                     alert(data.msg);
                     if (data.status == "success") location.replace("{{route('login')}}");
                 }, "json");
+        }
     });
 </script>
 @endsection

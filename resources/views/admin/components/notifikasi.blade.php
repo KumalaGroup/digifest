@@ -65,7 +65,7 @@
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">Rackham<i class="caret"></i></span><img src="{{asset('admin/images/wo.jpg')}}"></a>
             <ul class="dropdown-menu " role="menu">
-                <li><a href="{{route('loginAdmin')}}"><i class="fa fa-sign-out"></i>Keluar</a></li>
+                <li><a href="{{route('logout')}}"><i class="fa fa-sign-out"></i>Keluar</a></li>
             </ul>
         </li>
     </ul>
