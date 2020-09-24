@@ -78,13 +78,13 @@
 <script>
     $('#submit').click(function(e) {
         e.preventDefault();
-        if ($('#password').val() != $('#rePassword').val()) {
-            alert("Password tidak sama")
-            return false;
-        }
         var form = $('#form');
         var data = form.serialize();
         if (form.valid()) {
+            if ($('#password').val() != $('#rePassword').val()) {
+                alert("Password tidak sama")
+                return false;
+            }
             $(this).prop('disabled', true);
             $.post(location, data,
                 function(data, textStatus, jqXHR) {

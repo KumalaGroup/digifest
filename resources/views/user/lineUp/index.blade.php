@@ -11,8 +11,6 @@
     <nav class="nav-menu">
         <ul>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
-            <li><a href="{{route('mainStage',['brand'=>Request::segment(1)])}}"><i class="bx bx-layer"></i> <span>Main Stage</span></a></li>
-            <li><a href="{{route('rundown',['brand'=>Request::segment(1)])}}"><i class="bx bx-detail"></i> <span>Rundown</span></a></li>
             <li class="active"><a href="#resume"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href=""><i class="bx bx-user"></i> <span>Profil</span></a></li>

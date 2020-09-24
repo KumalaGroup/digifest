@@ -13,10 +13,9 @@ class Frontend extends Controller
             return $next($request);
         });
     }
-    function _cekSession($role = false)
+    function _cekSession()
     {
         $loggedIn = session('loggedIn');
-        if ($loggedIn && $loggedIn == "BackAdmin" && $role == "isAdmin") return redirect()->route('homeAdmin')->send();
-        elseif ($loggedIn && $loggedIn == "FrontUser") return redirect()->route('home')->send();
+        if ($loggedIn) return redirect()->route('home')->send();
     }
 }

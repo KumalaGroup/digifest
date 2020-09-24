@@ -11,8 +11,6 @@
     <nav class="nav-menu">
         <ul>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
-            <li><a href="{{route('mainStage',['brand'=>Request::segment(1)])}}"><i class="bx bx-layer"></i> <span>Main Stage</span></a></li>
-            <li><a href="{{route('rundown',['brand'=>Request::segment(1)])}}"><i class="bx bx-detail"></i> <span>Rundown</span></a></li>
             <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href=""><i class="bx bx-user"></i> <span>Profil</span></a></li>
@@ -83,7 +81,7 @@
 
                         <div class="phone zoom_img">
                             <i class="bx bxs-bookmark"></i>
-                            <h4 style="padding-top: 10px;"><a href="{{route('penawaran',['brand'=>Request::segment(1),'detail'=>'confero'])}}" style="color: #45505b;">Penawaran Terbatas</a></h4>
+                            <h4 style="padding-top: 10px;"><a href="{{route('penawaran',['brand'=>Request::segment(1),'detail'=>'confero'])}}" style="color: #45505b;">Transaksi</a></h4>
                         </div>
                     </div>
                 </div>

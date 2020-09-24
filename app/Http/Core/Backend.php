@@ -9,17 +9,14 @@ class Backend extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, Closure $next) {
-            $this->_cekSession();
+            // $this->_cekSession();
             return $next($request);
         });
     }
-    function _cekSession($role = false)
+    function _cekSession()
     {
         $loggedIn = session('loggedIn');
-        if (!$loggedIn && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
-        elseif (!$loggedIn) return redirect()->route('login')->send();
-        elseif ($loggedIn && $loggedIn == "BackAdmin" && $role == false) return redirect()->route('login')->send();
-        elseif ($loggedIn && $loggedIn == "FrontUser" && $role == "isAdmin") return redirect()->route('loginAdmin')->send();
+        if (!$loggedIn) return redirect()->route('login')->send();
     }
     function _cekRoute()
     {

@@ -19,24 +19,6 @@ class Home extends Backend
             'backgroundImage' => $backgroundImage
         ]);
     }
-    public function mainStage($brand)
-    {
-        $sectionTitle = ucwords($brand) . " Virtual Fair";
-        $backgroundImage = "hero-bg.jpg";
-        return view('user.home.mainStage', [
-            'sectionTitle' => $sectionTitle,
-            'backgroundImage' => $backgroundImage
-        ]);
-    }
-    public function rundown($brand)
-    {
-        $sectionTitle = ucwords($brand) . " Virtual Fair";
-        $backgroundImage = "hero-bg.jpg";
-        return view('user.home.rundown', [
-            'sectionTitle' => $sectionTitle,
-            'backgroundImage' => $backgroundImage
-        ]);
-    }
     public function logout(Request $request)
     {
         $request->session()->flush();
