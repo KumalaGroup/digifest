@@ -16,24 +16,32 @@ class LineUp extends Backend
     {
         $sectionTitle = "Line Up " . ucwords($brand);
         $backgroundImage = "hero-bg.jpg";
+        $result = get(parent::$urlApi . "digifest_lineUp/{$brand}");
         return view('user.lineUp.index', [
             'sectionTitle' => $sectionTitle,
-            'backgroundImage' => $backgroundImage
+            'backgroundImage' => $backgroundImage,
+            'baseImg' => parent::$baseImg,
+            'data' => $result
         ]);
     }
     public function detail($brand, $detail)
     {
+        $detail = urldecode($detail);
         $backgroundImage = "hero-bg.jpg";
+        $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
+        // debug($result);
         return view('user.lineUp.detail', [
             'sectionTitle' => $detail,
-            'backgroundImage' => $backgroundImage
+            'backgroundImage' => $backgroundImage,
+            'baseImg' => parent::$baseImg,
+            'data' => $result
         ]);
     }
     public function interiorExterior($brand, $detail)
     {
         $backgroundImage = "hero-bg.jpg";
         return view('user.lineUp.interiorExterior', [
-            'sectionTitle' => $detail,
+            'sectionTitle' => urldecode($detail),
             'backgroundImage' => $backgroundImage
         ]);
     }
@@ -41,7 +49,7 @@ class LineUp extends Backend
     {
         $backgroundImage = "hero-bg.jpg";
         return view('user.lineUp.testDrive', [
-            'sectionTitle' => $detail,
+            'sectionTitle' => urldecode($detail),
             'backgroundImage' => $backgroundImage
         ]);
     }
@@ -49,7 +57,7 @@ class LineUp extends Backend
     {
         $backgroundImage = "hero-bg.jpg";
         return view('user.lineUp.penawaran', [
-            'sectionTitle' => $detail,
+            'sectionTitle' => urldecode($detail),
             'backgroundImage' => $backgroundImage
         ]);
     }

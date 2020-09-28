@@ -52,70 +52,24 @@
             </div>
 
             <div class="row portfolio-container" data-aos="zoom-in" data-aos-delay="100">
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap zoom_img">
-                        <img src="{{asset('assets/img/portfolio/portfolio-4.jpg')}}" class="img-fluid" alt="">
+                @foreach($data as $v)
+                @php
+                $uri = urlencode($v->nama);
+                $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
+                @endphp
+                <div class="{{count($data)<6?'col-lg-6':'col-lg-4'}} col-md-6 portfolio-item">
+                    <div class="portfolio-wrap zoom_img" style="background-color: transparent;">
+                        <img src="{{$baseImg.'otomotif/'.$v->gambar}}" width="100%" height="{{count($data)<6?'300px':'200px'}}" style="object-fit: contain;">
                         <div class="portfolio-info">
-                            <h3 class="resume-title">Confero</h3>
+                            <h3 class="resume-title">{{$v->nama}}</h3>
                             <div class="portfolio-links">
-                                <a href="{{asset('assets/img/portfolio/portfolio-4.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Confero"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>'confero'])}}"><i class="bx bx-link"></i></a>
+                                <a href="{{$baseImg.'otomotif/'.$v->gambar}}" data-gall="portfolioGallery" class="venobox" title="{{$v->nama}}"><i class="bx bx-plus"></i></a>
+                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}"><i class="bx bx-link"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap zoom_img">
-                        <img src="{{asset('assets/img/portfolio/portfolio-6.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h3 class="resume-title">Confero</h3>
-                            <div class="portfolio-links">
-                                <a href="{{asset('assets/img/portfolio/portfolio-6.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Confero"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>'confero'])}}"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap zoom_img">
-                        <img src="{{asset('assets/img/portfolio/portfolio-7.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h3 class="resume-title">Confero</h3>
-                            <div class="portfolio-links">
-                                <a href="{{asset('assets/img/portfolio/portfolio-7.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Confero"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>'confero'])}}"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap zoom_img">
-                        <img src="{{asset('assets/img/portfolio/portfolio-8.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h3 class="resume-title">Confero</h3>
-                            <div class="portfolio-links">
-                                <a href="{{asset('assets/img/portfolio/portfolio-8.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Confero"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>'confero'])}}"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap zoom_img">
-                        <img src="{{asset('assets/img/portfolio/portfolio-9.jpg')}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h3 class="resume-title">Confero</h3>
-                            <div class="portfolio-links">
-                                <a href="{{asset('assets/img/portfolio/portfolio-9.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Confero"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>'confero'])}}"><i class="bx bx-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>

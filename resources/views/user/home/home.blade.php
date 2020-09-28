@@ -51,9 +51,22 @@
 
             <div class="row">
                 <div class="col-lg-8">
-                    <h3 class="resume-title">Rundown</h3>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mdkyQT7-hC0?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="resume-title">Rundown</h3>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mdkyQT7-hC0?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="resume-title">Link Invitation</h3>
+                            <div class="resume-item">
+                                <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
+                                <h5>2010 - 2014</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -99,9 +112,9 @@
                         <div class="col-lg-4 col-md-6 portfolio-item">
                             <div class="portfolio-wrap zoom_img py-4" style="background-color: transparent;">
                                 <img src="{{asset('assets/images/logo/logo_mercedes.png')}}" width="100%" height="100px" style="object-fit: contain;">
-                                <a href="{{route('lineUp',['brand'=>'mercedes'])}}">
+                                <a href="{{route('lineUp',['brand'=>'mercedes-benz'])}}">
                                     <div class="portfolio-info">
-                                        <h3 class="resume-title">Mercedes</h3>
+                                        <h3 class="resume-title">Mercedes-Benz</h3>
                                     </div>
                                 </a>
                             </div>

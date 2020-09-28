@@ -54,16 +54,8 @@
                 <div class="col-lg-7">
                     <div class="row portfolio-container" data-aos="zoom-in" data-aos-delay="100">
                         <div class="col-lg-12 portfolio-item">
-                            <div class="portfolio-wrap zoom_img">
-                                <img src="{{asset('assets/img/portfolio/portfolio-9.jpg')}}" class="img-fluid" alt="">
-                                <div class="portfolio-info">
-                                    <h4>Web 3</h4>
-                                    <p>Web</p>
-                                    <div class="portfolio-links">
-                                        <a href="{{asset('assets/img/portfolio/portfolio-9.jpg')}}" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                        <a href=""><i class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
+                            <div class="zoom_img" style="background-color: transparent;">
+                                <img src="{{$baseImg.(empty($data->warna)?'otomotif/'.$data->detail->gambar:'otomotif/warna/'.$data->warna[0]->gambar)}}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>
@@ -87,6 +79,10 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-12">
+                    <h3 class="resume-title"><small><strong>Mulai dari</strong></small> <span class="text-primary">IDR {{number_format($data->detail->harga,0,"",".")}},-</span></h3>
+                    <p>{{$data->detail->deskripsi}}</p>
+                </div>
                 <div class="col-md-12">
                     <h3 class="resume-title">Spesifikasi</h3>
                     <div class="resume-item">
