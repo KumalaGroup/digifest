@@ -9,7 +9,7 @@ class Backend extends Controller
     public function __construct()
     {
         $this->middleware(function ($request, Closure $next) {
-            // $this->_cekSession();
+            $this->_cekSession();
             return $next($request);
         });
     }
