@@ -1,5 +1,10 @@
 @extends('user.base')
 
+@php
+$uri = Request::segment(2);
+$uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
+@endphp
+
 @section('title')
 - {{ucwords(Request::segment(1))}}
 @endsection
@@ -10,12 +15,12 @@
 
     <nav class="nav-menu">
         <ul>
-            <li><a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>Request::segment(2)])}}"><i class="bx bx-arrow-back"></i> <span>Kembali</span></a></li>
+            <li><a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}"><i class="bx bx-arrow-back"></i> <span>Kembali</span></a></li>
             <br>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
             <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
             <br>
-            <li><a href=""><i class="bx bx-user"></i> <span>Profil</span></a></li>
+            <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
         </ul>
     </nav>
@@ -25,23 +30,6 @@
 
 @section('style')
 <style>
-    body {
-        width: 100%;
-        height: 100vh;
-        background: url("{{asset('assets/img/'.$backgroundImage)}}") top right no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-    }
-
-    body:before {
-        content: "";
-        background: rgba(255, 255, 255, 0.8);
-        position: fixed;
-        bottom: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-    }
 </style>
 @endsection
 

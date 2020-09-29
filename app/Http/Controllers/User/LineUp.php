@@ -3,15 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Core\Backend;
-use Illuminate\Http\Request;
 
 class LineUp extends Backend
 {
-    public function __construct()
-    {
-        parent::__construct();
-        parent::_cekRoute();
-    }
     public function index($brand)
     {
         $sectionTitle = "Line Up " . ucwords($brand);

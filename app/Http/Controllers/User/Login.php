@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Core\Frontend;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-use function GuzzleHttp\json_decode;
 
 class Login extends Frontend
 {

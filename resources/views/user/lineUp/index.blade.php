@@ -13,7 +13,7 @@
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
             <li class="active"><a href="#resume"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
             <br>
-            <li><a href=""><i class="bx bx-user"></i> <span>Profil</span></a></li>
+            <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
         </ul>
     </nav>

@@ -12,6 +12,7 @@ class Backend extends Controller
             $this->_cekSession();
             return $next($request);
         });
+        $this->_cekRoute();
     }
     function _cekSession()
     {
@@ -21,7 +22,7 @@ class Backend extends Controller
     function _cekRoute()
     {
         $brand = request()->segment(1);
-        if (isset($brand) && !in_array($brand, ["wuling", "hino", "mercedes-benz", "honda", "mazda", "keluar"]))
+        if (isset($brand) && !in_array($brand, ["wuling", "hino", "mercedes-benz", "honda", "mazda", "keluar", "profil"]))
             return abort(404);
     }
 }
