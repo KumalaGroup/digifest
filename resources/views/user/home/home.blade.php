@@ -52,16 +52,24 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h3 class="resume-title">Rundown</h3>
+                        <div class="col-lg-12 portfolio-item">
+                            <h3 class="resume-title"><i class="bx bx-cast"></i> Live</h3>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mdkyQT7-hC0?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MSQhwpYQbtQ?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-12 portfolio-item">
+                            <h3 class="resume-title"><i class="bx bxs-videos"></i> Playlist</h3>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/videoseries?list=OLAK5uy_kV6avNF4vnzPvVHXaWRjY9M40lGcwvZPc&autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div> -->
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h3 class="resume-title">Link Invitation</h3>
+                        <div class="col-lg-12 portfolio-item">
+                            <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Invitation</h3>
                             <div class="resume-item">
                                 <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
                                 <h5>2010 - 2014</h5>
@@ -69,8 +77,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <h3 class="resume-title">Rundown</h3>
+                <div class="col-lg-4 portfolio-item">
+                    <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
                     <div class="resume-item">
                         <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
                         <h5>2010 - 2014</h5>
@@ -85,9 +93,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="row">
                 <div class="col-md-12">
-                    <h3 class="resume-title">Line Up</h3>
+                    <h3 class="resume-title"><i class="bx bx-line-chart"></i> Line Up</h3>
                     <div class="row portfolio-container">
                         <div class="col-lg-4 col-md-6 portfolio-item">
                             <div class="portfolio-wrap zoom_img py-4" style="background-color: transparent;">

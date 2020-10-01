@@ -52,7 +52,7 @@
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required />
                         </div>
                         <div class="form-group mb-1">
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required minlength="6" />
                         </div>
                         <div class="text-center mt-4 mb-4"><button id="submit" class="btn_round btn-block">Masuk</button></div>
                         <p class="text-center">Belum punya akun? <a href="{{route('daftar')}}"><strong>Daftar</strong></a></p>

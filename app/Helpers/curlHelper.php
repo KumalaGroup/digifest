@@ -69,3 +69,11 @@ function reformatString($data)
     $judul = strpos($judul, "/") ? str_replace("/", " ", $judul) : $judul;
     return str_replace(" ", "_", $judul);
 }
+function tgl_sql($date)
+{
+    $exp = explode('-', $date);
+    if (count($exp) == 3) {
+        $date = $exp[2] . '-' . $exp[1] . '-' . $exp[0];
+    }
+    return $date;
+}

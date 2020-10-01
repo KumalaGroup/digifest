@@ -16,14 +16,26 @@ class Home extends Backend
     }
     public function profil(Request $request)
     {
-        $backgroundImage = "hero-bg.jpg";
-        $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
-        // debug($result);
-        return view('user.home.profil', [
-            'backgroundImage' => $backgroundImage,
-            'baseImg' => parent::$baseImg,
-            'data' => $result
-        ]);
+        if ($request->isMethod("post")) {
+            if ($request->hasFile('gambar')) {
+                $file = $request->file('gambar');
+                $fileName = date("dmYHis") . '.' . $file->getClientOriginalExtension();
+                $result = post(parent::$urlApi . "digifest_profil", ['id' => $request->id, 'gambar' => $fileName]);
+                if ($result->status === "success") $request->gambar->move('../assets/img_marketing/customer', $fileName);
+            } else {
+                foreach ($request->all() as $k => $v)
+                    $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
+                $data['tanggal_lahir'] = tgl_sql($data['tanggal_lahir']);
+                $result = post(parent::$urlApi . "digifest_profil", $data);
+            }
+            return json_encode($result, JSON_PRETTY_PRINT);
+        } else {
+            $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
+            return view('user.home.profil', [
+                'baseImg' => parent::$baseImg,
+                'data' => $result
+            ]);
+        }
     }
     public function logout(Request $request)
     {

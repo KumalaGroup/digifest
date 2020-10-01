@@ -41,7 +41,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                 <h2>{{$sectionTitle}}</h2>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Test Drive Virtual</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mdkyQT7-hC0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

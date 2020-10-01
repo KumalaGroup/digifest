@@ -18,7 +18,7 @@ Route::match(['get', 'post'], '/masuk', 'User\Login@index')->name('login');
 Route::match(['get', 'post'], '/daftar', 'User\Login@daftar')->name('daftar');
 
 Route::get('/', 'User\Home@index')->name('home');
-Route::get('/profil', 'User\Home@profil')->name('profil');
+Route::match(['get', 'post'], '/profil', 'User\Home@profil')->name('profil');
 Route::get('/keluar', 'User\Home@logout')->name('logout');
 
 Route::get('/{brand}', 'User\LineUp@index')->name('lineUp');

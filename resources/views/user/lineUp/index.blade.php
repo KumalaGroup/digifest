@@ -51,7 +51,7 @@
                 <h2>{{$sectionTitle}}</h2>
             </div>
 
-            <div class="row portfolio-container" data-aos="zoom-in" data-aos-delay="100">
+            <div class="row portfolio-container">
                 @foreach($data as $v)
                 @php
                 $uri = urlencode($v->nama);
