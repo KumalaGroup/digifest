@@ -35,26 +35,26 @@
 
     @yield('content')
 
-    <footer id="footer">
-        <div class="container">
-            <h3>Brandon Johnson</h3>
-            <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-            <div class="social-links">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+    <footer id="footer" style="background-color: white;">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-5 col-sm-4 col-md-3 col-lg-2 mx-auto">
+                    <img src="https://kumalagroup.id/assets/baru/img/logo.png" class="img_fluid mb-4" width="100%" alt="">
+                </div>
+                <div class="col-md-6 col-lg-8">
+                    <p class="mb-4">Didirikan pada tahun 1983, Kumala Group adalah salah satu perusahaan bisnis terbesar di sisi timur Indonesia. Kumala Group membangun perusahaan yang kompetitif dengan mengembangkan kerjasama yang saling menguntungkan antara merek-merek terkemuka nasional dan internasional di berbagai bidang.</p>
+                </div>
+                <div class="col-md-3 col-lg-2">
+                    <div class="social-links mb-4">
+                        <a href="https://www.facebook.com/kumalagroup1/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://www.instagram.com/kumalagroup/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UC7R09sGLSsz-Ky1nQs1Qbiw" class="youtube"><i class="bx bxl-youtube"></i></a>
+                    </div>
+                </div>
             </div>
+
             <div class="copyright">
-                &copy; Copyright <strong><span>MyResume</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: [license-url] -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                &copy; Copyright <strong><span>IT Kumala Group</span></strong>. All Rights Reserved
             </div>
         </div>
     </footer>
