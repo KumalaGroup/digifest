@@ -21,6 +21,7 @@
         content: "";
         background: rgba(255, 255, 255, 0.8);
         position: fixed;
+        z-index: -1;
         bottom: 0;
         top: 0;
         left: 0;

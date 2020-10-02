@@ -9,9 +9,11 @@ class Home extends Backend
 {
     public function index()
     {
+        $result = get(parent::$urlApi . "digifest_main");
         $backgroundImage = "hero-bg.jpg";
         return view('user.home.home', [
-            'backgroundImage' => $backgroundImage
+            'backgroundImage' => $backgroundImage,
+            'data' => $result
         ]);
     }
     public function profil(Request $request)

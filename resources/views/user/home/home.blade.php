@@ -33,6 +33,7 @@
         content: "";
         background: rgba(255, 255, 255, 0.8);
         position: fixed;
+        z-index: -1;
         bottom: 0;
         top: 0;
         left: 0;
@@ -51,28 +52,32 @@
 
             <div class="row">
                 <div class="col-lg-8">
+                    @if($data->is_live==1)
                     <div class="row">
                         <div class="col-lg-12 portfolio-item">
                             <h3 class="resume-title"><i class="bx bx-cast"></i> Live</h3>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MSQhwpYQbtQ?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="{{$data->live}}?autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
+                    @else
+                    <div class="row">
                         <div class="col-lg-12 portfolio-item">
                             <h3 class="resume-title"><i class="bx bxs-videos"></i> Playlist</h3>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/videoseries?list=OLAK5uy_kV6avNF4vnzPvVHXaWRjY9M40lGcwvZPc&autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe class="embed-responsive-item" src="{{$data->playlist}}&autoplay=1&mute=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-12 portfolio-item">
-                            <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Invitation</h3>
+                            <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Zoom Meeting</h3>
                             <div class="resume-item">
-                                <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-                                <h5>2010 - 2014</h5>
+                                <p><a href="{{$data->link_zoom}}" target="_blank" rel="noopener noreferrer">{{$data->link_zoom}}</a></p>
+                                <h5>Meeting ID : {{$data->meeting_id}}</h5> <br>
+                                <h5>Passcode : {{$data->passcode}}</h5>
                             </div>
                         </div>
                     </div>
