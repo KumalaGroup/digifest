@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 
 class Home extends Backend
 {
-    public function index()
+    public function index(Request $request)
     {
-        $result = get(parent::$urlApi . "digifest_main");
-        $backgroundImage = "hero-bg.jpg";
-        return view('user.home.home', [
-            'backgroundImage' => $backgroundImage,
-            'data' => $result
-        ]);
+        if ($request->has('rundown')) {
+            $result = get(parent::$urlApi . "digifest_rundown/" . $request->date);
+            return json_encode($result, JSON_PRETTY_PRINT);
+        } else {
+            $result = get(parent::$urlApi . "digifest_main");
+            $backgroundImage = "hero-bg.jpg";
+            return view('user.home.home', [
+                'backgroundImage' => $backgroundImage,
+                'data' => $result
+            ]);
+        }
     }
     public function profil(Request $request)
     {

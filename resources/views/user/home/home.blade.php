@@ -44,6 +44,7 @@
 
 @section('content')
 <div id="main">
+
     <section id="resume" class="resume portfolio">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="section-title">
@@ -77,7 +78,9 @@
                             <div class="resume-item">
                                 <p><a href="{{$data->link_zoom}}" target="_blank" rel="noopener noreferrer">{{$data->link_zoom}}</a></p>
                                 <h5>Meeting ID : {{$data->meeting_id}}</h5> <br>
-                                <h5>Passcode : {{$data->passcode}}</h5>
+                                <h5>Passcode : {{$data->passcode}}</h5> <br>
+                                <h5>Tanggal : {{formatHariTanggal($data->waktu)['tanggal']}}</h5> <br>
+                                <h5>Waktu : {{formatHariTanggal($data->waktu)['waktu']}}</h5>
                             </div>
                         </div>
                     </div>
@@ -85,16 +88,10 @@
                 <div class="col-lg-4 portfolio-item">
                     <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
                     <div class="resume-item">
-                        <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-                        <h5>2010 - 2014</h5>
-                        <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-                        <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-                        <ul>
-                            <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-                            <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-                            <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-                            <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-                        </ul>
+                        <h4 id="tanggal">06-10-2020</h4>
+                        <table class="table table-condensed">
+                            <tbody id="rundown"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -161,4 +158,68 @@
 @endsection
 
 @section('js')
+<script>
+    $('#tanggal').datepicker({
+        format: `dd-mm-yyyy`,
+        autoclose: true
+    }).on("changeDate", function(e) {
+        $('#rundown').children().remove();
+        $('#tanggal').html(formatHariTanggal(e.date));
+        $.get(location, {
+                rundown: true,
+                date: formatDate(e.date)
+            },
+            function(data, textStatus, jqXHR) {
+                if (data != null)
+                    $.each(data, function(indexInArray, valueOfElement) {
+                        $('#rundown').append(`<tr>
+                        <td>` + valueOfElement.waktu + `</td>
+                        <td>` + valueOfElement.judul + `</td>
+                        </tr>`);
+                    });
+                else $('#rundown').append(`<tr>
+                        <td>Tidak ada rundown acara</td>
+                        </tr>`);
+            }, "json");
+    });
+    $('#tanggal').html(formatHariTanggal(new Date()));
+    $.get(location, {
+            rundown: true,
+            date: formatDate(new Date())
+        },
+        function(data, textStatus, jqXHR) {
+            if (data != null)
+                $.each(data, function(indexInArray, valueOfElement) {
+                    $('#rundown').append(`<tr>
+                    <td>` + valueOfElement.waktu + `</td>
+                    <td>` + valueOfElement.judul + `</td>
+                    </tr>`);
+                });
+            else $('#rundown').append(`<tr>
+                    <td>Tidak ada rundown acara</td>
+                    </tr>`);
+        }, "json");
+
+    function formatHariTanggal(date) {
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
+        var day = date.getDate();
+        var month = date.getMonth();
+        var thisDay = date.getDay(),
+            thisDay = myDays[thisDay];
+        var yy = date.getYear();
+        var year = (yy < 1000) ? yy + 1900 : yy;
+        return thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
+    }
+
+    function formatDate(date) {
+        var day = date.getDate(),
+            day = day < 10 ? `0` + day : day;
+        var month = date.getMonth() + 1,
+            month = month < 10 ? `0` + month : month;
+        var year = date.getYear(),
+            year = (year < 1000) ? year + 1900 : year;
+        return year + '-' + month + '-' + day;
+    }
+</script>
 @endsection

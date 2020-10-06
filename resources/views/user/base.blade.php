@@ -23,6 +23,7 @@
     <link href="{{asset('assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
 
     <!-- Template Main CSS File -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
@@ -46,9 +47,9 @@
                 </div>
                 <div class="col-md-3 col-lg-2">
                     <div class="social-links mb-4">
-                        <a href="https://www.facebook.com/kumalagroup1/" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="https://www.instagram.com/kumalagroup/" class="instagram"><i class="bx bxl-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UC7R09sGLSsz-Ky1nQs1Qbiw" class="youtube"><i class="bx bxl-youtube"></i></a>
+                        <a href="https://www.facebook.com/kumalagroup1/" class="facebook" target="_blank" rel="noopener noreferrer"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://www.instagram.com/kumalagroup/" class="instagram" target="_blank" rel="noopener noreferrer"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UC7R09sGLSsz-Ky1nQs1Qbiw" class="youtube" target="_blank" rel="noopener noreferrer"><i class="bx bxl-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -73,6 +74,7 @@
     <script src="{{asset('assets/vendor/owl.carousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/vendor/typed.js/typed.min.js')}}"></script>
     <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
