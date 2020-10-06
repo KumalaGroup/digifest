@@ -39,6 +39,10 @@
         left: 0;
         right: 0;
     }
+
+    #tanggal {
+        cursor: pointer;
+    }
 </style>
 @endsection
 
