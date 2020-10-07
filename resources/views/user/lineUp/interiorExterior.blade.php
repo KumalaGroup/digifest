@@ -43,13 +43,13 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Interior 360&deg;</h3>
-                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true" data-autoplay></div>
+                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Exterior 360&deg;</h3>
-                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true" data-autoplay></div>
+                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
                 </div>
             </div>
         </div>
