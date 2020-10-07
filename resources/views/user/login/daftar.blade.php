@@ -9,10 +9,10 @@
 
 @section('style')
 <style>
-    /* body {
+    body {
         width: 100%;
         height: 100vh;
-        background: url("{{asset('assets/img/'.$backgroundImage)}}") top right no-repeat;
+        /* background: url("{{asset('assets/img/'.$backgroundImage)}}") top right no-repeat; */
         background-size: cover;
         background-attachment: fixed;
     }
@@ -26,7 +26,7 @@
         top: 0;
         left: 0;
         right: 0;
-    } */
+    }
 
     .error {
         color: red;
