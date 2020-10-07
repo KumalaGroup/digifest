@@ -21,7 +21,7 @@
 
 @section('style')
 <style>
-    body {
+    /* body {
         width: 100%;
         height: 100vh;
         background: url("{{asset('assets/img/'.$backgroundImage)}}") top right no-repeat;
@@ -38,7 +38,7 @@
         top: 0;
         left: 0;
         right: 0;
-    }
+    } */
 
     #tanggal {
         cursor: pointer;
@@ -167,13 +167,13 @@
         format: `dd-mm-yyyy`,
         autoclose: true
     }).on("changeDate", function(e) {
-        $('#rundown').children().remove();
         $('#tanggal').html(formatHariTanggal(e.date));
         $.get(location, {
                 rundown: true,
                 date: formatDate(e.date)
             },
             function(data, textStatus, jqXHR) {
+                $('#rundown').children().remove();
                 if (data != null)
                     $.each(data, function(indexInArray, valueOfElement) {
                         $('#rundown').append(`<tr>
@@ -192,6 +192,7 @@
             date: formatDate(new Date())
         },
         function(data, textStatus, jqXHR) {
+            $('#rundown').children().remove();
             if (data != null)
                 $.each(data, function(indexInArray, valueOfElement) {
                     $('#rundown').append(`<tr>
@@ -206,7 +207,7 @@
 
     function formatHariTanggal(date) {
         var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
+        var myDays = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
         var day = date.getDate();
         var month = date.getMonth();
         var thisDay = date.getDay(),
