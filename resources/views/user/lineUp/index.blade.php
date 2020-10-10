@@ -11,7 +11,7 @@
     <nav class="nav-menu">
         <ul>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
-            <li class="active"><a href="#resume"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
+            <li class="active"><a href="#resume"><i class="bx bxs-car"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
@@ -61,13 +61,11 @@
                 <div class="{{count($data)<6?'col-lg-6':'col-lg-4'}} col-md-6 portfolio-item">
                     <div class="portfolio-wrap zoom_img" style="background-color: transparent;">
                         <img src="{{$baseImg.'otomotif/'.$v->gambar}}" width="100%" height="{{count($data)<6?'300px':'200px'}}" style="object-fit: contain;">
-                        <div class="portfolio-info">
-                            <h3 class="resume-title">{{$v->nama}}</h3>
-                            <div class="portfolio-links">
-                                <a href="{{$baseImg.'otomotif/'.$v->gambar}}" data-gall="portfolioGallery" class="venobox" title="{{$v->nama}}"><i class="bx bx-plus"></i></a>
-                                <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}"><i class="bx bx-link"></i></a>
+                        <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}">
+                            <div class="portfolio-info">
+                                <h3 class="resume-title">{{$v->nama}}</h3>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 @endforeach

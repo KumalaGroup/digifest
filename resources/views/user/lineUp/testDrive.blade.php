@@ -18,7 +18,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <li><a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}"><i class="bx bx-arrow-back"></i> <span>Kembali</span></a></li>
             <br>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
-            <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
+            <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bxs-car"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
@@ -43,9 +43,11 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Test Drive Virtual</h3>
+                    @if(!empty($data))
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mdkyQT7-hC0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="{{$data[0]->deskripsi}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

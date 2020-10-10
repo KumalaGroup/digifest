@@ -50,8 +50,8 @@
                                 <img src="{{empty($data->gambar)?asset('assets/img/avatar.png'):$baseImg.'customer/'.$data->gambar}}" class="img-fluid" id="profilImg" alt="">
                                 <div class="portfolio-info">
                                     <div class="portfolio-links">
-                                        <a href="{{empty($data->gambar)?asset('assets/img/avatar.png'):$baseImg.'customer/'.$data->gambar}}" data-gall="portfolioGallery" class="venobox" title=""><i class="bx bx-plus"></i></a>
-                                        <a id="avatar" href="javascript:void(0)"><i class="bx bx-link"></i></a>
+                                        <a href="{{empty($data->gambar)?asset('assets/img/avatar.png'):$baseImg.'customer/'.$data->gambar}}" data-gall="portfolioGallery" class="venobox" title=""><i class="bx bx-image"></i></a>
+                                        <a id="avatar" href="javascript:void(0)"><i class="bx bx-image-add"></i></a>
                                     </div>
                                 </div>
                             </div>

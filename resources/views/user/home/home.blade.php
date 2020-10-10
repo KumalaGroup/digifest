@@ -76,6 +76,7 @@
                         </div>
                     </div>
                     @endif
+                    @if($data->is_zoom==1)
                     <div class="row">
                         <div class="col-lg-12 portfolio-item">
                             <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Zoom Meeting</h3>
@@ -88,6 +89,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="col-lg-4 portfolio-item">
                     <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
@@ -101,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="resume-title"><i class="bx bx-line-chart"></i> Line Up</h3>
+                    <h3 class="resume-title"><i class="bx bxs-car"></i> Line Up</h3>
                     <div class="row portfolio-container">
                         <div class="col-lg-4 col-md-6 portfolio-item">
                             <div class="portfolio-wrap zoom_img py-4" style="background-color: transparent;">
@@ -163,9 +165,22 @@
 
 @section('js')
 <script>
+    $.fn.datepicker.dates['id'] = {
+        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
+        today: "Today",
+        clear: "Clear",
+        format: "mm/dd/yyyy",
+        titleFormat: "MM yyyy",
+        weekStart: 0
+    };
     $('#tanggal').datepicker({
-        format: `dd-mm-yyyy`,
-        autoclose: true
+        format: `yyyy-mm-dd`,
+        autoclose: true,
+        language: `id`
     }).on("changeDate", function(e) {
         $('#tanggal').html(formatHariTanggal(e.date));
         $.get(location, {

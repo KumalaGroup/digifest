@@ -18,7 +18,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <li><a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}"><i class="bx bx-arrow-back"></i> <span>Kembali</span></a></li>
             <br>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
-            <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bx-line-chart"></i> <span>Line Up</span></a></li>
+            <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bxs-car"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
@@ -43,13 +43,18 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Interior 360&deg;</h3>
-                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @if($data['interior']!=="")
+                    <div class="cloudimage-360" data-folder="{{$baseImg}}otomotif/360in/" data-image-list="[{{htmlspecialchars_decode($data['interior'])}}]" data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @endif
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Exterior 360&deg;</h3>
-                    <div class="cloudimage-360" data-folder="https://scaleflex.cloudimg.io/crop/1920x700/n/https://cdn.scaleflex.it/demo/360-car/" data-filename="iris-{index}.jpeg" data-amount="36" data-spin-reverse data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @if($data['exterior']!=="")
+                    <div class="cloudimage-360" data-folder="{{$baseImg}}otomotif/360ex/" data-image-list="[{{htmlspecialchars_decode($data['exterior'])}}]" data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @endif
                 </div>
             </div>
         </div>
