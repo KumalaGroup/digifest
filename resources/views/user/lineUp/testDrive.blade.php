@@ -47,6 +47,8 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="{{$data[0]->deskripsi}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
+                    @else
+                    <p>Belum ada video</p>
                     @endif
                 </div>
             </div>

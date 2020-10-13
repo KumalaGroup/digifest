@@ -45,6 +45,8 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                     <h3 class="resume-title">Interior 360&deg;</h3>
                     @if($data['interior']!=="")
                     <div class="cloudimage-360" data-folder="{{$baseImg}}otomotif/360in/" data-image-list="[{{htmlspecialchars_decode($data['interior'])}}]" data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @else
+                    <p>Belum ada gambar</p>
                     @endif
                 </div>
             </div>
@@ -54,6 +56,8 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                     <h3 class="resume-title">Exterior 360&deg;</h3>
                     @if($data['exterior']!=="")
                     <div class="cloudimage-360" data-folder="{{$baseImg}}otomotif/360ex/" data-image-list="[{{htmlspecialchars_decode($data['exterior'])}}]" data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    @else
+                    <p>Belum ada gambar</p>
                     @endif
                 </div>
             </div>
