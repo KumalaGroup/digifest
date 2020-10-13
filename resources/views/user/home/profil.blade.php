@@ -12,6 +12,8 @@
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
             <br>
             <li class="active"><a href="#contact"><i class="bx bx-user"></i> <span>Profil</span></a></li>
+            <li><a href="{{route('transaksi')}}"><i class="bx bxs-basket"></i> <span>Transaksi</span></a></li>
+            <br>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
         </ul>
     </nav>
@@ -134,7 +136,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9">
-                                        <div class="mt-4 mb-4"><button id="submit" class="btn_round">Ubah</button></div>
+                                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Ubah</button></div>
                                     </div>
                                 </div>
                             </form>
@@ -158,7 +160,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9">
-                                        <div class="mt-4 mb-4"><button id="submitPass" class="btn_round">Ubah</button></div>
+                                        <div class="zoom_img mt-4 mb-4"><button id="submitPass" class="btn_round">Ubah</button></div>
                                     </div>
                                 </div>
                             </form>

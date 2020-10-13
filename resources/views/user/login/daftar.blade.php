@@ -65,7 +65,7 @@
                         <div class="form-group mb-1">
                             <input type="password" name="rePassword" class="form-control" id="rePassword" placeholder="Ulangi Password" required minlength="6" />
                         </div>
-                        <div class="text-center mt-4 mb-4"><button id="submit" class="btn_round btn-block">Daftar</button></div>
+                        <div class="text-center zoom_img mt-4 mb-4"><button id="submit" class="btn_round btn-block">Daftar</button></div>
                         <p class="text-center">Sudah punya akun? <a href="{{route('login')}}"><strong>Masuk</strong></a></p>
                     </form>
                 </div>

@@ -19,6 +19,8 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <li><a href="{{route('lineUp',['brand'=>Request::segment(1)])}}"><i class="bx bxs-car"></i> <span>Line Up</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
+            <li><a href="{{route('transaksi')}}"><i class="bx bxs-basket"></i> <span>Transaksi</span></a></li>
+            <br>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
         </ul>
     </nav>
@@ -57,12 +59,12 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                         @endforeach
                     </div>
                     @if(count($data->warna)>1)<div class="text-center">
-                        <div id="pilihan_warna">
+                        <div id="pilihan_warna" class="portfolio-item">
                             @foreach ($data->warna as $v)
                             <a class="btn_round btn-sm mx-1" data-nama="{{$v->nama_warna}}" style="background-color: #{{$v->deskripsi}}; border: 2px solid #45505b; padding: 10px 15px;">&nbsp;&nbsp;</a>
                             @endforeach
+                            <p id="nama_warna" class="mt-3">{{$data->warna[0]->nama_warna}}</p>
                         </div>
-                        <p id="nama_warna" class="mt-3">{{$data->warna[0]->nama_warna}}</p>
                     </div>
                     @endif
                     @else
@@ -81,14 +83,16 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                             <i class="bx bx-reset"></i>
                             <h4 style="padding-top: 10px;"><a href="{{route('interiorExterior',['brand'=>Request::segment(1),'detail'=>$uri])}}" style="color: #45505b;">Interior & Exterior 360&deg;</a></h4>
                         </div>
-                        <div class="email zoom_img">
+                        <div class="email zoom_img mt-4">
                             <i class="bx bxs-car"></i>
                             <h4 style="padding-top: 10px;"><a href="{{route('testDrive',['brand'=>Request::segment(1),'detail'=>$uri])}}" style="color: #45505b;">Test Drive Virtual</a></h4>
                         </div>
-
-                        <div class="phone zoom_img">
-                            <i class="bx bxs-bookmark"></i>
-                            <h4 style="padding-top: 10px;"><a href="{{route('penawaran',['brand'=>Request::segment(1),'detail'=>$uri])}}" style="color: #45505b;">Transaksi</a></h4>
+                        <br>
+                        <div class="phone zoom_img px-5">
+                            <button class="btn_round btn-block">Tambah ke Keranjang</button>
+                        </div>
+                        <div class="phone zoom_img mt-2 px-5">
+                            <button class="btn_round btn-block">Beli Sekarang</button>
                         </div>
                     </div>
                 </div>

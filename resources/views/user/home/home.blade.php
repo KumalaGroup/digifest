@@ -12,6 +12,8 @@
             <li class="active"><a href="#resume"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
+            <li><a href="{{route('transaksi')}}"><i class="bx bxs-basket"></i> <span>Transaksi</span></a></li>
+            <br>
             <li><a href="{{route('logout')}}"><i class="bx bx-log-out-circle"></i> <span>Keluar</span></a></li>
         </ul>
     </nav>
