@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\Home;
 use App\Http\Controllers\User\LineUp;
 use App\Http\Controllers\User\Login;
+use App\Http\Controllers\User\Transaksi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::match(['get', 'post'], '/daftar', [Login::class, 'daftar'])->name('daftar
 
 Route::get('/', [Home::class, 'index'])->name('home');
 Route::match(['get', 'post'], '/profil', [Home::class, 'profil'])->name('profil');
-Route::get('/transaksi', [Home::class, 'logout'])->name('transaksi');
+Route::get('/transaksi', [Transaksi::class, 'index'])->name('transaksi');
 Route::get('/keluar', [Home::class, 'logout'])->name('logout');
 
 Route::get('/{brand}', [LineUp::class, 'index'])->name('lineUp');

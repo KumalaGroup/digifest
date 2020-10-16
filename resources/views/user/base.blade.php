@@ -37,7 +37,7 @@
     @yield('content')
 
     <footer id="footer" style="background-color: white;">
-        <div class="container mt-3">
+        <div class="container mt-3" data-aos="zoom-in">
             <div class="row">
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 mx-auto">
                     <img src="https://kumalagroup.id/assets/baru/img/logo.png" class="img_fluid mb-4" width="100%" alt="">

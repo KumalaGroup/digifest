@@ -63,12 +63,12 @@
                 <div class="col-md-8 col-lg-9 pt-4 pt-lg-0 content portfolio-item">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="bx bx-user"></i> Personal</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="bx bx-lock"></i> Keamanan</a>
+                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-profile"><i class="bx bx-user"></i> &nbsp; Personal</a>
+                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-contact"><i class="bx bx-lock"></i> &nbsp; Keamanan</a>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="tab-pane fade show active" id="nav-profile">
                             <form id="form" class="php-email-form mt-5" style="background-color: transparent;">
                                 @csrf
                                 <div class="form-group row mb-1">
@@ -141,7 +141,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        <div class="tab-pane fade" id="nav-contact">
                             <form id="formPass" class="php-email-form mt-5" style="background-color: transparent;">
                                 @csrf
                                 <div class="form-group row mb-1">

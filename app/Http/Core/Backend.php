@@ -21,8 +21,11 @@ class Backend extends Controller
     }
     function _cekRoute()
     {
-        $brand = request()->segment(1);
-        if (isset($brand) && !in_array($brand, ["wuling", "hino", "mercedes-benz", "honda", "mazda", "keluar", "profil"]))
+        $uri = request()->segment(1);
+        if (isset($uri) && !in_array($uri, [
+            "wuling", "hino", "mercedes-benz", "honda", "mazda", "keluar",
+            "profil", "transaksi"
+        ]))
             return abort(404);
     }
 }
