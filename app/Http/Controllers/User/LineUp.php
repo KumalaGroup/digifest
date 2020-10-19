@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Core\Backend;
+use Illuminate\Http\Request;
 
 class LineUp extends Backend
 {
@@ -18,17 +19,25 @@ class LineUp extends Backend
             'data' => $result
         ]);
     }
-    public function detail($brand, $detail)
+    public function detail($brand, $detail, Request $request)
     {
-        $detail = urldecode($detail);
-        $backgroundImage = "hero-bg.jpg";
-        $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
-        return view('user.lineUp.detail', [
-            'sectionTitle' => $detail,
-            'backgroundImage' => $backgroundImage,
-            'baseImg' => parent::$baseImg,
-            'data' => $result
-        ]);
+        if ($request->isMethod("post")) {
+            foreach ($request->all() as $k => $v)
+                $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
+            $data['customer'] = $request->session()->get('id');
+            $result = post(parent::$urlApi . "digifest_cart", $data);
+            return json_encode($result, JSON_PRETTY_PRINT);
+        } else {
+            $detail = urldecode($detail);
+            $backgroundImage = "hero-bg.jpg";
+            $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
+            return view('user.lineUp.detail', [
+                'sectionTitle' => $detail,
+                'backgroundImage' => $backgroundImage,
+                'baseImg' => parent::$baseImg,
+                'data' => $result
+            ]);
+        }
     }
     public function interiorExterior($brand, $detail)
     {

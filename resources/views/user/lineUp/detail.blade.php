@@ -29,9 +29,15 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 <style>
+    .error {
+        color: red;
+        padding-top: 5px;
+        padding-left: 5px;
+        margin: 0;
+        font-size: 10pt;
+    }
+
 </style>
 @endsection
 
@@ -61,7 +67,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                     @if(count($data->warna)>1)<div class="text-center">
                         <div id="pilihan_warna" class="portfolio-item">
                             @foreach ($data->warna as $v)
-                            <a class="btn_round btn-sm mx-1" data-nama="{{$v->nama_warna}}" style="background-color: #{{$v->deskripsi}}; border: 2px solid #45505b; padding: 10px 15px;">&nbsp;&nbsp;</a>
+                            <a class="btn_round btn-sm mx-1" data-nama="{{$v->nama_warna}}" style="background-color: #{{$v->deskripsi}}; border: 2px solid #45505b; padding: 10px 15px;cursor: pointer;">&nbsp;&nbsp;</a>
                             @endforeach
                             <p id="nama_warna" class="mt-3">{{$data->warna[0]->nama_warna}}</p>
                         </div>
@@ -92,12 +98,23 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                             </a>
                         </div>
                         <br>
-                        <div class="phone zoom_img px-5">
-                            <button class="btn_round btn-block" data-toggle="modal" data-target="#exampleModal">Tambah ke Keranjang</button>
-                        </div>
-                        <div class="phone zoom_img mt-2 px-5">
-                            <button class="btn_round btn-block">Beli Sekarang</button>
-                        </div>
+
+                        <form id="form" class="php-email-form" style="background-color: transparent;">
+                            <div class="phone px-5">
+                                @csrf
+                                <div class="form-group row mb-0">
+                                    <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" />
+                                </div>
+                            </div>
+                            <input type="hidden" name="unit" value="{{$data->detail->id}}">
+                            <input type="hidden" name="method" value="post">
+                            <div class="phone zoom_img mt-2 px-5">
+                                <button class="btn_round btn-block" id="cart">Tambah ke Keranjang</button>
+                            </div>
+                            <div class="phone zoom_img mt-2 px-5">
+                                <button class="btn_round btn-block" id="buy">Beli Sekarang</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -134,45 +151,40 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         </div>
     </section>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 <script>
     $('.owl-carousel').owlCarousel({
-        items: 1,
-        margin: 10,
-        loop: false,
-        nav: false,
-        dots: false,
-        mouseDrag: false,
-        touchDrag: false,
-        autoHeight: true
+        items: 1
+        , margin: 10
+        , loop: false
+        , nav: false
+        , dots: false
+        , mouseDrag: false
+        , touchDrag: false
+        , autoHeight: true
     });
     $('#pilihan_warna a').click(function() {
         $('.owl-carousel').trigger('to.owl.carousel', [$(this).index()]);
         $('#nama_warna').html($(this).data('nama'));
     });
+
+    $('#cart').on('click', function(e) {
+        e.preventDefault();
+        var form = $('#form');
+        if (form.valid()) {
+            var data = form.serialize();
+            $.post(location, data, function(data, textStatus, jqXHR) {
+                alert(data.msg);
+                form.trigger('reset');
+            }, "json");
+        }
+    });
+    $('#buy').on('click', function(e) {
+        e.preventDefault();
+        alert($('#jumlah').val());
+    });
+
 </script>
 @endsection

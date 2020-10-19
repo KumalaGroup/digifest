@@ -34,6 +34,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -45,7 +46,7 @@
                 <h2>Profil</h2>
             </div>
             <div class="row">
-                <div class="col-md-4 col-lg-3">
+                <div class="col-sm-6 col-md-4 col-lg-3 mx-auto">
                     <div class="row portfolio-container">
                         <div class="col-lg-12 portfolio-item">
                             <div class="portfolio-wrap zoom_img" style="background-color: transparent;">
@@ -177,9 +178,9 @@
 @section('js')
 <script>
     $(`#tanggal_lahir`).datepicker({
-        format: `dd-mm-yyyy`,
-        startView: 2,
-        autoclose: true
+        format: `dd-mm-yyyy`
+        , startView: 2
+        , autoclose: true
     });
     $(`#tanggal_lahir`).datepicker(`update`, `{{tgl_sql($data->tanggal_lahir)}}`);
     $(`#agama`).val(`{{$data->agama}}`);
@@ -188,11 +189,11 @@
     $('#submit').click(function(e) {
         e.preventDefault();
         var form = $('#form');
-        var data = form.serialize();
         if (form.valid()) {
+            var data = form.serialize();
             $(this).prop('disabled', true);
-            $.post(location, data,
-                function(data, textStatus, jqXHR) {
+            $.post(location, data
+                , function(data, textStatus, jqXHR) {
                     $('#submit').prop('disabled', false);
                     alert(data.msg);
                 }, "json");
@@ -208,8 +209,8 @@
                 return false;
             }
             $(this).prop('disabled', true);
-            $.post(location, data,
-                function(data, textStatus, jqXHR) {
+            $.post(location, data
+                , function(data, textStatus, jqXHR) {
                     $('#submitPass').prop('disabled', false);
                     alert(data.msg);
                     if (data.status == "success") $('#formPass').trigger('reset');
@@ -237,17 +238,18 @@
             return false;
         }
         $.ajax({
-            type: 'post',
-            url: location,
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function(response) {
+            type: 'post'
+            , url: location
+            , data: formData
+            , processData: false
+            , contentType: false
+            , dataType: 'json'
+            , success: function(response) {
                 alert(response.msg);
                 if (response.status == "success") $('#profilImg').attr('src', `{{$baseImg}}customer/` + response.img);
             }
         });
     });
+
 </script>
 @endsection

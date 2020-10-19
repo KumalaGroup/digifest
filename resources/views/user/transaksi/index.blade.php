@@ -34,6 +34,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -54,7 +55,35 @@
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-profile">
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive mt-5">
+                                        <table class="table table-condensed text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Brand</th>
+                                                    <th>Model</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($data as $v)
+                                                <tr>
+                                                    <td>{{ucwords($v->brand)}}</td>
+                                                    <td>{{$v->model}}</td>
+                                                    <td>{{$v->jumlah}}</td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="badge badge-primary edit">Edit</a>
+                                                        <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$v->id}}">Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="nav-contact">
 
@@ -69,6 +98,55 @@
 
 @section('js')
 <script>
+    $('tbody').on('click', '.hapus', async function() {
+        if (confirm('Apakah anda yakin? Data akan dihapus')) {
+            var data = await $.post(location, {
+                _token: '{{csrf_token()}}'
+                , id: $(this).data('id')
+                , method: 'delete'
+            });
+            data = JSON.parse(data);
+            if (data.status == 'success') {
+                alert(data.msg);
+                $(this).closest('tr').remove();
+            }
+        }
+    });
+    var jumlah_temp = [];
+    var aksi_temp;
+    $('tbody').on('click', '.edit', function() {
+        var parent = $(this).closest('tr');
+        var index = parent.index();
+        var jumlah = parent.find('td').eq(2);
+        var aksi = parent.find('td').eq(3);
+        jumlah_temp[index] = jumlah.html();
+        aksi_temp = aksi.html();
+        jumlah.html(`
+            <form class="php-email-form editform">
+                <div class="form-group row mb-0">
+                    <input type="number" class="form-control jumlah" value="` + jumlah_temp[index] + `" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" />
+                </div>
+            </form>
+        `);
+        aksi.html(`
+            <a href="javascript:void(0)" class="badge badge-primary save">Simpan</a>
+        `);
+        // console.log(data);
+    });
+    $('tbody').on('change', '.jumlah', function() {
+        var parent = $(this).closest('tr');
+        var index = parent.index();
+        var jumlah = parent.find('.jumlah');
+        jumlah_temp[index] = jumlah.val();
+    });
+    $('tbody').on('click', '.save', function() {
+        var parent = $(this).closest('tr');
+        var index = parent.index();
+        var jumlah = parent.find('td').eq(2);
+        var aksi = parent.find('td').eq(3);
+        jumlah.html(jumlah_temp[index]);
+        aksi.html(aksi_temp);
+    });
 
 </script>
 @endsection

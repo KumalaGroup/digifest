@@ -23,11 +23,11 @@ Route::match(['get', 'post'], '/daftar', [Login::class, 'daftar'])->name('daftar
 
 Route::get('/', [Home::class, 'index'])->name('home');
 Route::match(['get', 'post'], '/profil', [Home::class, 'profil'])->name('profil');
-Route::get('/transaksi', [Transaksi::class, 'index'])->name('transaksi');
+Route::match(['get', 'post'], '/transaksi', [Transaksi::class, 'index'])->name('transaksi');
 Route::get('/keluar', [Home::class, 'logout'])->name('logout');
 
 Route::get('/{brand}', [LineUp::class, 'index'])->name('lineUp');
-Route::get('/{brand}/{detail}', [LineUp::class, 'detail'])->name('lineUpDetail');
+Route::match(['get', 'post'], '/{brand}/{detail}', [LineUp::class, 'detail'])->name('lineUpDetail');
 
 Route::get('/{brand}/{detail}/interiorExterior', [LineUp::class, 'interiorExterior'])->name('interiorExterior');
 Route::get('/{brand}/{detail}/testDrive', [LineUp::class, 'testDrive'])->name('testDrive');
