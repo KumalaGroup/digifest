@@ -103,7 +103,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                             <div class="phone px-5">
                                 @csrf
                                 <div class="form-group row mb-0">
-                                    <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" />
+                                    <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
                                 </div>
                             </div>
                             <input type="hidden" name="unit" value="{{$data->detail->id}}">
@@ -169,7 +169,9 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         $('.owl-carousel').trigger('to.owl.carousel', [$(this).index()]);
         $('#nama_warna').html($(this).data('nama'));
     });
-
+    $('#jumlah').on('change', function() {
+        if ($(this).val() < 1) $(this).val('');
+    });
     $('#cart').on('click', function(e) {
         e.preventDefault();
         var form = $('#form');

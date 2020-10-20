@@ -12,6 +12,7 @@ class Transaksi extends Backend
         if ($request->isMethod('post')) {
             foreach ($request->all() as $k => $v)
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
+            $data['customer'] = $request->session()->get('id');
             $result = post(parent::$urlApi . 'digifest_cart', $data);
             return json_encode($result, JSON_PRETTY_PRINT);
         } else {

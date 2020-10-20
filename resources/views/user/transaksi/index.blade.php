@@ -61,10 +61,51 @@
                                         <table class="table table-condensed text-center">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>Brand</th>
                                                     <th>Model</th>
                                                     <th>Jumlah</th>
                                                     <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if(!empty($data))
+                                                @foreach($data as $v)
+                                                <tr>
+                                                    <td><input type="checkbox" name="" id=""></td>
+                                                    <td>{{ucwords($v->brand)}}</td>
+                                                    <td>{{$v->model}}</td>
+                                                    <td>{{$v->jumlah}}</td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" class="badge badge-primary edit" data-id="{{$v->id}}" data-unit="{{$v->unit}}">Edit</a>
+                                                        <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$v->id}}">Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="5">Belum ada data</td>
+                                                </tr>
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Checkout</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-contact">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive mt-5">
+                                        <table class="table table-condensed text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>Brand</th>
+                                                    <th>Model</th>
+                                                    <th>Jumlah</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -73,10 +114,6 @@
                                                     <td>{{ucwords($v->brand)}}</td>
                                                     <td>{{$v->model}}</td>
                                                     <td>{{$v->jumlah}}</td>
-                                                    <td>
-                                                        <a href="javascript:void(0)" class="badge badge-primary edit">Edit</a>
-                                                        <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$v->id}}">Hapus</a>
-                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -84,9 +121,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-contact">
-
                         </div>
                     </div>
                 </div>
@@ -112,39 +146,70 @@
             }
         }
     });
+    var jumlah_origin = [];
     var jumlah_temp = [];
     var aksi_temp;
     $('tbody').on('click', '.edit', function() {
         var parent = $(this).closest('tr');
         var index = parent.index();
-        var jumlah = parent.find('td').eq(2);
-        var aksi = parent.find('td').eq(3);
-        jumlah_temp[index] = jumlah.html();
+        var jumlah = parent.find('td').eq(3);
+        var aksi = parent.find('td').eq(4);
+        jumlah_origin[index] = jumlah_temp[index] = jumlah.html();
         aksi_temp = aksi.html();
         jumlah.html(`
             <form class="php-email-form editform">
                 <div class="form-group row mb-0">
-                    <input type="number" class="form-control jumlah" value="` + jumlah_temp[index] + `" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" />
+                    <input type="number" class="form-control jumlah" value="` + jumlah_temp[index] + `" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
                 </div>
             </form>
         `);
         aksi.html(`
-            <a href="javascript:void(0)" class="badge badge-primary save">Simpan</a>
+            <a href="javascript:void(0)" class="badge badge-primary save" data-id="` + $(this).data('id') + `" data-unit="` + $(this).data('unit') + `">Simpan</a>
+            <a href="javascript:void(0)" class="badge badge-danger cancel">Batal</a>
         `);
-        // console.log(data);
     });
     $('tbody').on('change', '.jumlah', function() {
         var parent = $(this).closest('tr');
         var index = parent.index();
         var jumlah = parent.find('.jumlah');
+        if (jumlah.val() < 0) jumlah.val(0);
         jumlah_temp[index] = jumlah.val();
     });
-    $('tbody').on('click', '.save', function() {
+    $('tbody').on('click', '.save', async function() {
         var parent = $(this).closest('tr');
         var index = parent.index();
-        var jumlah = parent.find('td').eq(2);
-        var aksi = parent.find('td').eq(3);
-        jumlah.html(jumlah_temp[index]);
+        var jumlah = parent.find('td').eq(3);
+        var aksi = parent.find('td').eq(4);
+        var data;
+        if (jumlah_temp[index] == 0)
+            data = await $.post(location, {
+                _token: '{{csrf_token()}}'
+                , id: $(this).data('id')
+                , method: 'delete'
+            });
+        else data = await $.post(location, {
+            _token: '{{csrf_token()}}'
+            , unit: $(this).data('unit')
+            , jumlah: jumlah_temp[index]
+            , method: 'post'
+        });
+        data = JSON.parse(data);
+        if (data.status == 'success') {
+            alert(data.msg);
+            if (jumlah_temp[index] == 0)
+                $(this).closest('tr').remove();
+            else {
+                jumlah.html(jumlah_temp[index]);
+                aksi.html(aksi_temp);
+            }
+        }
+    });
+    $('tbody').on('click', '.cancel', function() {
+        var parent = $(this).closest('tr');
+        var index = parent.index();
+        var jumlah = parent.find('td').eq(3);
+        var aksi = parent.find('td').eq(4);
+        jumlah.html(jumlah_origin[index]);
         aksi.html(aksi_temp);
     });
 

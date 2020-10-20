@@ -134,11 +134,8 @@
                                 </div>
                                 <input type="file" name="gambar" id="gambar" hidden>
                                 <input type="hidden" name="id" value="{{$data->id}}">
-                                <div class="form-group row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9">
-                                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Ubah</button></div>
-                                    </div>
+                                <div class="form-group text-center">
+                                    <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Ubah</button></div>
                                 </div>
                             </form>
                         </div>
@@ -158,11 +155,8 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="id" value="{{$data->id}}">
-                                <div class="form-group row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9">
-                                        <div class="zoom_img mt-4 mb-4"><button id="submitPass" class="btn_round">Ubah</button></div>
-                                    </div>
+                                <div class="form-group text-center">
+                                    <div class="zoom_img mt-4 mb-4"><button id="submitPass" class="btn_round">Ubah</button></div>
                                 </div>
                             </form>
                         </div>
