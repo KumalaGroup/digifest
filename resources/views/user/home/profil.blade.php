@@ -30,7 +30,6 @@
     .error {
         color: red;
         padding-top: 5px;
-        padding-left: 5px;
         margin: 0;
         font-size: 10pt;
     }

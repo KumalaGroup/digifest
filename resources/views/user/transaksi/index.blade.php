@@ -30,7 +30,6 @@
     .error {
         color: red;
         padding-top: 5px;
-        padding-left: 5px;
         margin: 0;
         font-size: 10pt;
     }
@@ -72,7 +71,7 @@
                                                 @if(!empty($data))
                                                 @foreach($data as $v)
                                                 <tr>
-                                                    <td><input type="checkbox" name="" id=""></td>
+                                                    <td><input type="checkbox" value="{{$v->id}}" class="check"></td>
                                                     <td>{{ucwords($v->brand)}}</td>
                                                     <td>{{$v->model}}</td>
                                                     <td>{{$v->jumlah}}</td>
@@ -91,7 +90,7 @@
                                         </table>
                                     </div>
                                     <div class="form-group text-center">
-                                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Checkout</button></div>
+                                        <div class="zoom_img mt-4 mb-4"><button id="checkout" class="btn_round">Checkout</button></div>
                                     </div>
                                 </div>
                             </div>
@@ -146,9 +145,17 @@
             }
         }
     });
+    var selectedId = [];
     var jumlah_origin = [];
     var jumlah_temp = [];
     var aksi_temp;
+    $('tbody').on('click', '.check', function() {
+        if ($(this).is(':checked')) selectedId.push($(this).val());
+        else {
+            var index = selectedId.indexOf($(this).val())
+            selectedId.splice(index, 1);
+        }
+    });
     $('tbody').on('click', '.edit', function() {
         var parent = $(this).closest('tr');
         var index = parent.index();
@@ -211,6 +218,13 @@
         var aksi = parent.find('td').eq(4);
         jumlah.html(jumlah_origin[index]);
         aksi.html(aksi_temp);
+    });
+    $('#checkout').on('click', function() {
+        if (selectedId.length == 0) alert(`Silahkan pilih item`)
+        else {
+            var data = btoa(JSON.stringify(selectedId));
+            location.replace(`{{route('transaksi',['kd'=>generateKode()])}}&query=` + data);
+        }
     });
 
 </script>

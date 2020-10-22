@@ -31,10 +31,10 @@
     .error {
         color: red;
         padding-top: 5px;
-        padding-left: 5px;
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -87,13 +87,14 @@
                 return false;
             }
             $(this).prop('disabled', true);
-            $.post(location, data,
-                function(data, textStatus, jqXHR) {
+            $.post(location, data
+                , function(data, textStatus, jqXHR) {
                     $('#submit').prop('disabled', false);
                     alert(data.msg);
                     if (data.status == "success") location.replace("{{route('login')}}");
                 }, "json");
         }
     });
+
 </script>
 @endsection

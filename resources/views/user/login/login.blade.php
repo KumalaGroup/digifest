@@ -31,10 +31,10 @@
     .error {
         color: red;
         padding-top: 5px;
-        padding-left: 5px;
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -72,11 +72,12 @@
         var form = $('#form');
         var data = form.serialize();
         if ($('#form').valid())
-            $.post(location, data,
-                function(data, textStatus, jqXHR) {
+            $.post(location, data
+                , function(data, textStatus, jqXHR) {
                     if (data.status == "success") location.reload();
                     else alert(data.msg);
                 }, "json");
     });
+
 </script>
 @endsection

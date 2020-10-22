@@ -25,7 +25,7 @@ class Home extends Backend
     {
         if ($request->isMethod("post")) {
             if ($request->hasFile('gambar')) {
-                $file = $request->file('gambar');
+                $file = $request->gambar;
                 $fileName = date("dmYHis") . '.' . $file->getClientOriginalExtension();
                 $result = post(parent::$urlApi . "digifest_profil", ['id' => $request->id, 'gambar' => $fileName]);
                 if ($result->status === "success") $request->gambar->move('../assets/img_marketing/customer', $fileName);

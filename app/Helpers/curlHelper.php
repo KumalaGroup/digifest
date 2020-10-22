@@ -119,3 +119,19 @@ function formatHariTanggal($waktu)
         'waktu' => $jam
     ];
 }
+
+function generateKode($length = null)
+{
+    $token = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    $token = substr(str_shuffle($token), 0, $length ?? 10);
+    return $token;
+}
+
+function formatRupiah($value)
+{
+    return number_format($value, 2, ",", ".");
+}
+function formatAngka($value)
+{
+    return implode("", explode(".", $value));
+}

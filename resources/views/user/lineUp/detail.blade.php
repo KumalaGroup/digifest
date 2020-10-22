@@ -33,7 +33,6 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
     .error {
         color: red;
         padding-top: 5px;
-        padding-left: 5px;
         margin: 0;
         font-size: 10pt;
     }
