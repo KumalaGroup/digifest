@@ -188,13 +188,15 @@
         var jumlah = parent.find('td').eq(3);
         var aksi = parent.find('td').eq(4);
         var data;
-        if (jumlah_temp[index] == 0)
-            data = await $.post(location, {
-                _token: '{{csrf_token()}}'
-                , id: $(this).data('id')
-                , method: 'delete'
-            });
-        else data = await $.post(location, {
+        if (jumlah_temp[index] == 0) {
+            if (confirm('Apakah anda yakin? Data akan dihapus'))
+                data = await $.post(location, {
+                    _token: '{{csrf_token()}}'
+                    , id: $(this).data('id')
+                    , method: 'delete'
+                });
+            else return false;
+        } else data = await $.post(location, {
             _token: '{{csrf_token()}}'
             , unit: $(this).data('unit')
             , jumlah: jumlah_temp[index]
@@ -223,7 +225,7 @@
         if (selectedId.length == 0) alert(`Silahkan pilih item`)
         else {
             var data = btoa(JSON.stringify(selectedId));
-            location.replace(`{{route('transaksi',['kd'=>generateKode()])}}&query=` + data);
+            location.replace(`{{route('transaksiCheckout',['kd'=>generateKode()])}}&query=` + data);
         }
     });
 

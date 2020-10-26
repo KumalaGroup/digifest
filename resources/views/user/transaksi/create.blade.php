@@ -194,6 +194,7 @@
                     , dataType: 'json'
                     , success: function(response) {
                         alert(response.msg);
+                        if (response.status == "success") location.replace(`{{route('transaksi')}}`)
                     }
                 });
             }
