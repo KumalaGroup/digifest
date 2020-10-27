@@ -104,7 +104,7 @@
                                                 <tr>
                                                     <th>No. Transaksi</th>
                                                     <th>Jumlah</th>
-                                                    <th>Uang Muka</th>
+                                                    <th>Uang Tanda Jadi</th>
                                                     <th>Status Pembayaran</th>
                                                 </tr>
                                             </thead>
@@ -255,7 +255,7 @@
         if (selectedId.length == 0) alert(`Silahkan pilih item`)
         else {
             var data = btoa(JSON.stringify(selectedId));
-            location.replace(`{{route('transaksiCheckout',['kd'=>generateKode()])}}&query=` + data);
+            location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + data);
         }
     });
 

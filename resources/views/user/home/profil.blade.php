@@ -174,6 +174,7 @@
         format: `dd-mm-yyyy`
         , startView: 2
         , autoclose: true
+        , startDate: new Date('1970-01-01')
     });
     $(`#tanggal_lahir`).datepicker(`update`, `{{tgl_sql($data->tanggal_lahir)}}`);
     $(`#agama`).val(`{{$data->agama}}`);

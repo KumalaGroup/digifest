@@ -191,7 +191,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                 alert(data.msg);
                 if (data.status == "success") {
                     var id = btoa(JSON.stringify([data.id]));
-                    location.replace(`{{route('transaksiCheckout',['kd'=>generateKode()])}}&query=` + id);
+                    location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + id);
                 }
             }, "json");
         }

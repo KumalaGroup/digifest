@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Kumala Virtual Fair @yield('title')</title>
+    <title>Kumala Digifest @yield('title')</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -38,7 +38,7 @@
     @yield('content')
 
     <footer id="footer" style="background-color: white;">
-        <div class="container mt-3" data-aos="zoom-in">
+        <div class="container mt-3">
             <div class="row">
                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 mx-auto">
                     <img src="https://kumalagroup.id/assets/baru/img/logo.png" class="img_fluid mb-4" width="100%" alt="">
@@ -60,8 +60,8 @@
             </div>
         </div>
     </footer>
-    <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
     <div id="preloader"></div>
+    <a href="https://api.whatsapp.com/send?phone=62081212100700" class="float" target="_blank"> <i class="bx bxl-whatsapp my-float"></i> </a>
 
     <!-- Vendor JS Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -80,6 +80,20 @@
 
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}
+            , Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script")
+                , s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5ee1bcf84a7c6258179a5e68/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+    </script>
 
     @yield('js')
 </body>

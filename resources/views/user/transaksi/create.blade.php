@@ -77,9 +77,9 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Uang Muka</p>
+                            <p class="col-sm-3 my-auto">Uang Tanda Jadi</p>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="uang_muka" id="uang_muka" placeholder="Uang Muka" onkeydown="input_number(event)" onkeyup="$(this).val(format_rupiah($(this).val()))" required />
+                                <input type="text" class="form-control" name="uang_muka" id="uang_muka" placeholder="Uang Tanda Jadi" onkeydown="input_number(event)" onkeyup="$(this).val(format_rupiah($(this).val()))" required />
                             </div>
                         </div>
                         <div class="form-group row mb-1">

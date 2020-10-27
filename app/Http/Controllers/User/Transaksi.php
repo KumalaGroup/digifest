@@ -28,7 +28,7 @@ class Transaksi extends Backend
         if ($request->isMethod('post')) {
             foreach ($request->all() as $k => $v)
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
-            $rand = generateKode(5);
+            $rand = generateKode(4);
             $customer = $request->session()->get('id');
             if ($request->hasFile('foto_ktp')) {
                 $file = $request->foto_ktp;

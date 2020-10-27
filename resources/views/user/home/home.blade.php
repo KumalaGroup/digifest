@@ -45,6 +45,7 @@
     #tanggal {
         cursor: pointer;
     }
+
 </style>
 @endsection
 
@@ -54,7 +55,7 @@
     <section id="resume" class="resume portfolio">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="section-title">
-                <h2>Kumala Virtual Fair</h2>
+                <h2>Kumala Digifest</h2>
             </div>
 
             <div class="row">
@@ -168,28 +169,29 @@
 @section('js')
 <script>
     $.fn.datepicker.dates['id'] = {
-        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"],
-        monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
-        today: "Today",
-        clear: "Clear",
-        format: "mm/dd/yyyy",
-        titleFormat: "MM yyyy",
-        weekStart: 0
+        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        , monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
+        , today: "Today"
+        , clear: "Clear"
+        , format: "mm/dd/yyyy"
+        , titleFormat: "MM yyyy"
+        , weekStart: 0
     };
     $('#tanggal').datepicker({
-        format: `yyyy-mm-dd`,
-        autoclose: true,
-        language: `id`
+        format: `yyyy-mm-dd`
+        , autoclose: true
+        , language: `id`
+        , todayHighlight: true
     }).on("changeDate", function(e) {
         $('#tanggal').html(formatHariTanggal(e.date));
         $.get(location, {
-                rundown: true,
-                date: formatDate(e.date)
-            },
-            function(data, textStatus, jqXHR) {
+                rundown: true
+                , date: formatDate(e.date)
+            }
+            , function(data, textStatus, jqXHR) {
                 $('#rundown').children().remove();
                 if (data != null)
                     $.each(data, function(indexInArray, valueOfElement) {
@@ -205,10 +207,10 @@
     });
     $('#tanggal').html(formatHariTanggal(new Date()));
     $.get(location, {
-            rundown: true,
-            date: formatDate(new Date())
-        },
-        function(data, textStatus, jqXHR) {
+            rundown: true
+            , date: formatDate(new Date())
+        }
+        , function(data, textStatus, jqXHR) {
             $('#rundown').children().remove();
             if (data != null)
                 $.each(data, function(indexInArray, valueOfElement) {
@@ -227,21 +229,22 @@
         var myDays = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
         var day = date.getDate();
         var month = date.getMonth();
-        var thisDay = date.getDay(),
-            thisDay = myDays[thisDay];
+        var thisDay = date.getDay()
+            , thisDay = myDays[thisDay];
         var yy = date.getYear();
         var year = (yy < 1000) ? yy + 1900 : yy;
         return thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
     }
 
     function formatDate(date) {
-        var day = date.getDate(),
-            day = day < 10 ? `0` + day : day;
-        var month = date.getMonth() + 1,
-            month = month < 10 ? `0` + month : month;
-        var year = date.getYear(),
-            year = (year < 1000) ? year + 1900 : year;
+        var day = date.getDate()
+            , day = day < 10 ? `0` + day : day;
+        var month = date.getMonth() + 1
+            , month = month < 10 ? `0` + month : month;
+        var year = date.getYear()
+            , year = (year < 1000) ? year + 1900 : year;
         return year + '-' + month + '-' + day;
     }
+
 </script>
 @endsection
