@@ -120,7 +120,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title"><small><strong>Mulai dari</strong></small>
-                        <span class="text-primary">IDR {{number_format($data->detail->harga,0,"",".")}},-</span></h3>
+                        <span class="text-primary">IDR {{formatRupiah($data->detail->harga)}},-</span></h3>
                     <p>{{$data->detail->deskripsi}}</p>
                 </div>
                 <div class="col-md-12">
@@ -178,13 +178,23 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             var data = form.serialize();
             $.post(location, data, function(data, textStatus, jqXHR) {
                 alert(data.msg);
-                form.trigger('reset');
+                if (data.status == "success") form.trigger('reset');
             }, "json");
         }
     });
     $('#buy').on('click', function(e) {
         e.preventDefault();
-        alert($('#jumlah').val());
+        var form = $('#form');
+        if (form.valid()) {
+            var data = form.serialize();
+            $.post(location, data, function(data, textStatus, jqXHR) {
+                alert(data.msg);
+                if (data.status == "success") {
+                    var id = btoa(JSON.stringify([data.id]));
+                    location.replace(`{{route('transaksiCheckout',['kd'=>generateKode()])}}&query=` + id);
+                }
+            }, "json");
+        }
     });
 
 </script>

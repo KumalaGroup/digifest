@@ -129,7 +129,7 @@ function generateKode($length = null)
 
 function formatRupiah($value)
 {
-    return number_format($value, 2, ",", ".");
+    return number_format($value, 0, ",", ".");
 }
 function formatAngka($value)
 {

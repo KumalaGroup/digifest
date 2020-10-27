@@ -16,7 +16,10 @@ class Transaksi extends Backend
             $result = post(parent::$urlApi . 'digifest_cart', $data);
             return json_encode($result, JSON_PRETTY_PRINT);
         } else {
-            $result = get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id'));
+            $result = (object) array(
+                "cart" => get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id')),
+                "riwayat" => get(parent::$urlApi . 'digifest_riwayat/' . $request->session()->get('id'))
+            );
             return view('user.transaksi.index', ['data' => $result]);
         }
     }
@@ -42,9 +45,12 @@ class Transaksi extends Backend
             $data['customer'] = $customer;
             $result = post(parent::$urlApi . 'digifest_checkout', $data);
             if ($result->status == "success") {
-                if ($request->hasFile('foto_ktp')) $request->foto_ktp->move('../assets/img_marketing/checkout', $data['foto_ktp']);
-                if ($request->hasFile('foto_kk')) $request->foto_kk->move('../assets/img_marketing/checkout', $data['foto_kk']);
-                if ($request->hasFile('foto_reklis')) $request->foto_reklis->move('../assets/img_marketing/checkout', $data['foto_reklis']);
+                if ($request->hasFile('foto_ktp'))
+                    $request->foto_ktp->move('../assets/img_marketing/checkout', $data['foto_ktp']);
+                if ($request->hasFile('foto_kk'))
+                    $request->foto_kk->move('../assets/img_marketing/checkout', $data['foto_kk']);
+                if ($request->hasFile('foto_reklis'))
+                    $request->foto_reklis->move('../assets/img_marketing/checkout', $data['foto_reklis']);
             }
             return json_encode($result, JSON_PRETTY_PRINT);
         } else {

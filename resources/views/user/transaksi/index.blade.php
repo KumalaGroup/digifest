@@ -60,7 +60,7 @@
                                         <table class="table table-condensed text-center">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
+                                                    <th><input type="checkbox" id="checkAll"> &nbsp; Semua</th>
                                                     <th>Brand</th>
                                                     <th>Model</th>
                                                     <th>Jumlah</th>
@@ -68,16 +68,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if(!empty($data))
-                                                @foreach($data as $v)
+                                                @if(!empty($data->cart))
+                                                @foreach($data->cart as $value)
                                                 <tr>
-                                                    <td><input type="checkbox" value="{{$v->id}}" class="check"></td>
-                                                    <td>{{ucwords($v->brand)}}</td>
-                                                    <td>{{$v->model}}</td>
-                                                    <td>{{$v->jumlah}}</td>
+                                                    <td><input type="checkbox" value="{{$value->id}}" class="check"></td>
+                                                    <td>{{ucwords($value->brand)}}</td>
+                                                    <td>{{$value->model}}</td>
+                                                    <td>{{$value->jumlah}}</td>
                                                     <td>
-                                                        <a href="javascript:void(0)" class="badge badge-primary edit" data-id="{{$v->id}}" data-unit="{{$v->unit}}">Edit</a>
-                                                        <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$v->id}}">Hapus</a>
+                                                        <a href="javascript:void(0)" class="badge badge-primary edit" data-id="{{$value->id}}" data-unit="{{$value->unit}}">Edit</a>
+                                                        <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$value->id}}">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -102,19 +102,29 @@
                                         <table class="table table-condensed text-center">
                                             <thead>
                                                 <tr>
-                                                    <th>Brand</th>
-                                                    <th>Model</th>
+                                                    <th>No. Transaksi</th>
                                                     <th>Jumlah</th>
+                                                    <th>Uang Muka</th>
+                                                    <th>Status Pembayaran</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($data as $v)
+                                                @if(!empty($data->riwayat))
+                                                @foreach($data->riwayat as $value)
                                                 <tr>
-                                                    <td>{{ucwords($v->brand)}}</td>
-                                                    <td>{{$v->model}}</td>
-                                                    <td>{{$v->jumlah}}</td>
+                                                    <td>{{$value->kode}}</td>
+                                                    <td>{{$value->item}}</td>
+                                                    <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
+                                                    <td>{!!$value->status == 0
+                                                        ?'<a href="javascript:void(0)" class="badge badge-warning">Belum Lunas</a>'
+                                                        :'<a href="javascript:void(0)" class="badge badge-success">Lunas</a>'!!}</td>
                                                 </tr>
                                                 @endforeach
+                                                @else
+                                                <tr>
+                                                    <td colspan="5">Belum ada data</td>
+                                                </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -149,11 +159,31 @@
     var jumlah_origin = [];
     var jumlah_temp = [];
     var aksi_temp;
+    $('#checkAll').on('click', function() {
+        var rows = $('tbody').find('.check');
+        selectedId.length = 0;
+        if ($(this).is(':checked')) {
+            $.each(rows, function() {
+                $(this).prop('checked', true);
+                selectedId.push($(this).val());
+            });
+        } else {
+            selectedId.length = 0;
+            $.each(rows, function() {
+                $(this).prop('checked', false);
+            });
+        }
+    })
     $('tbody').on('click', '.check', function() {
-        if ($(this).is(':checked')) selectedId.push($(this).val());
-        else {
+        if ($(this).is(':checked')) {
+            var check = $('tbody').find('.check').not(':checked');
+            selectedId.push($(this).val());
+            if (check.length == 0)
+                $('#checkAll').prop('checked', true);
+        } else {
             var index = selectedId.indexOf($(this).val())
             selectedId.splice(index, 1);
+            $('#checkAll').prop('checked', false);
         }
     });
     $('tbody').on('click', '.edit', function() {
