@@ -171,29 +171,33 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
     $('#jumlah').on('change', function() {
         if ($(this).val() < 1) $(this).val('');
     });
-    $('#cart').on('click', function(e) {
+    $('#cart').on('click', async function(e) {
         e.preventDefault();
         var form = $('#form');
         if (form.valid()) {
+            $(this).prop('disabled', true);
             var data = form.serialize();
-            $.post(location, data, function(data, textStatus, jqXHR) {
-                alert(data.msg);
-                if (data.status == "success") form.trigger('reset');
-            }, "json");
+            var data = await $.post(location, data);
+            data = JSON.parse(data);
+            $(this).prop('disabled', false);
+            alert(data.msg);
+            if (data.status == "success") form.trigger('reset');
         }
     });
-    $('#buy').on('click', function(e) {
+    $('#buy').on('click', async function(e) {
         e.preventDefault();
         var form = $('#form');
         if (form.valid()) {
+            $(this).prop('disabled', true);
             var data = form.serialize();
-            $.post(location, data, function(data, textStatus, jqXHR) {
-                alert(data.msg);
-                if (data.status == "success") {
-                    var id = btoa(JSON.stringify([data.id]));
-                    location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + id);
-                }
-            }, "json");
+            var data = await $.post(location, data);
+            data = JSON.parse(data);
+            $(this).prop('disabled', false);
+            alert(data.msg);
+            if (data.status == "success") {
+                var id = btoa(JSON.stringify([data.id]));
+                location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + id);
+            }
         }
     });
 

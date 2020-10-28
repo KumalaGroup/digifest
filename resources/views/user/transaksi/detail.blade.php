@@ -96,14 +96,16 @@
                                 <table class="table table-condensed text-center">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Brand</th>
                                             <th>Model</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($data->result as $value)
+                                        @foreach($data->result as $key=>$value)
                                         <tr>
+                                            <td>{{$key+1}}</td>
                                             <td>{{ucwords($value->brand)}}</td>
                                             <td>{{$value->model}}</td>
                                             <td>{{$value->jumlah}}</td>

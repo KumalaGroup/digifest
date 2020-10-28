@@ -106,6 +106,7 @@
                                         <table id="tabelRiwayat" class="table table-condensed text-center table-hover">
                                             <thead>
                                                 <tr>
+                                                    <th>No.</th>
                                                     <th>No. Transaksi</th>
                                                     <th>Jumlah</th>
                                                     <th>Uang Tanda Jadi</th>
@@ -114,8 +115,9 @@
                                             </thead>
                                             <tbody>
                                                 @if(!empty($data->riwayat))
-                                                @foreach($data->riwayat as $value)
+                                                @foreach($data->riwayat as $key=>$value)
                                                 <tr>
+                                                    <td>{{$key+1}}</td>
                                                     <td>{{$value->kode}}</td>
                                                     <td>{{$value->item}}</td>
                                                     <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
@@ -265,7 +267,7 @@
         }
     });
     $('#tabelRiwayat').on('click', 'tr', function() {
-        var inv = $(this).find('td').eq(0);
+        var inv = $(this).find('td').eq(1);
         var data = btoa(JSON.stringify([inv.html()]));
         location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
     });

@@ -129,7 +129,7 @@
     $('#provinsi').on('change', function() {
         $('#form').valid();
     });
-    $('#submit').on('click', function(e) {
+    $('#submit').on('click', async function(e) {
         var breakout = false;
         e.preventDefault();
         var formData = new FormData();
@@ -183,18 +183,18 @@
         if (breakout) return false;
         else {
             if ($('#form').valid()) {
-                $.ajax({
+                $(this).prop('disabled', true);
+                var response = await $.ajax({
                     type: 'post'
                     , url: location
                     , data: formData
                     , processData: false
                     , contentType: false
-                    , dataType: 'json'
-                    , success: function(response) {
-                        alert(response.msg);
-                        if (response.status == "success") location.replace(`{{route('transaksi')}}`)
-                    }
                 });
+                response = JSON.parse(response);
+                $(this).prop('disabled', false);
+                alert(response.msg);
+                if (response.status == "success") location.replace(`{{route('transaksi')}}`);
             }
         }
     });

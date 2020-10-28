@@ -67,16 +67,20 @@
 
 @section('js')
 <script>
-    $('#submit').click(function(e) {
+    $('#submit').click(async function(e) {
         e.preventDefault();
         var form = $('#form');
         var data = form.serialize();
-        if ($('#form').valid())
-            $.post(location, data
-                , function(data, textStatus, jqXHR) {
-                    if (data.status == "success") location.reload();
-                    else alert(data.msg);
-                }, "json");
+        if ($('#form').valid()) {
+            $(this).prop('disabled', true);
+            var data = await $.post(location, data);
+            data = JSON.parse(data);
+            if (data.status == "success") location.reload();
+            else {
+                alert(data.msg);
+                $(this).prop('disabled', false);
+            }
+        }
     });
 
 </script>
