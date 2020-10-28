@@ -63,4 +63,10 @@ class Transaksi extends Backend
             }
         }
     }
+    public function detail(Request $request)
+    {
+        $result = get(parent::$urlApi . 'digifest_riwayat/' .
+            $request->session()->get('id') . '/' . $request->kdinvdg);
+        return view('user.transaksi.detail', ['data' => $result]);
+    }
 }
