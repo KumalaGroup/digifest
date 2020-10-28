@@ -224,27 +224,5 @@
                     </tr>`);
         }, "json");
 
-    function formatHariTanggal(date) {
-        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        var myDays = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
-        var day = date.getDate();
-        var month = date.getMonth();
-        var thisDay = date.getDay()
-            , thisDay = myDays[thisDay];
-        var yy = date.getYear();
-        var year = (yy < 1000) ? yy + 1900 : yy;
-        return thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
-    }
-
-    function formatDate(date) {
-        var day = date.getDate()
-            , day = day < 10 ? `0` + day : day;
-        var month = date.getMonth() + 1
-            , month = month < 10 ? `0` + month : month;
-        var year = date.getYear()
-            , year = (year < 1000) ? year + 1900 : year;
-        return year + '-' + month + '-' + day;
-    }
-
 </script>
 @endsection

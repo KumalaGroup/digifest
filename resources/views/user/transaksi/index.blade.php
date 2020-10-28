@@ -34,6 +34,10 @@
         font-size: 10pt;
     }
 
+    #tabelRiwayat tr:hover {
+        cursor: pointer;
+    }
+
 </style>
 @endsection
 
@@ -76,7 +80,7 @@
                                                     <td>{{$value->model}}</td>
                                                     <td>{{$value->jumlah}}</td>
                                                     <td>
-                                                        <a href="javascript:void(0)" class="badge badge-primary edit" data-id="{{$value->id}}" data-unit="{{$value->unit}}">Edit</a>
+                                                        <a href="javascript:void(0)" class="badge badge-primary edit" data-id="{{$value->id}}" data-unit="{{$value->unit}}">Ubah</a>
                                                         <a href="javascript:void(0)" class="badge badge-danger hapus" data-id="{{$value->id}}">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -99,7 +103,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive mt-5">
-                                        <table class="table table-condensed text-center">
+                                        <table id="tabelRiwayat" class="table table-condensed text-center table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>No. Transaksi</th>
@@ -115,9 +119,11 @@
                                                     <td>{{$value->kode}}</td>
                                                     <td>{{$value->item}}</td>
                                                     <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
-                                                    <td>{!!$value->status == 0
+                                                    <td>
+                                                        {!!$value->status == 0
                                                         ?'<a href="javascript:void(0)" class="badge badge-warning">Belum Lunas</a>'
-                                                        :'<a href="javascript:void(0)" class="badge badge-success">Lunas</a>'!!}</td>
+                                                        :'<a href="javascript:void(0)" class="badge badge-success">Lunas</a>'!!}
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                                 @else
@@ -257,6 +263,11 @@
             var data = btoa(JSON.stringify(selectedId));
             location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + data);
         }
+    });
+    $('#tabelRiwayat').on('click', 'tr', function() {
+        var inv = $(this).find('td').eq(0);
+        var data = btoa(JSON.stringify([inv.html()]));
+        location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
     });
 
 </script>

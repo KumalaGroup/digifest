@@ -9,8 +9,6 @@
 
     <nav class="nav-menu">
         <ul>
-            <li><a href="{{route('transaksi')}}"><i class="bx bx-arrow-back"></i> <span>Kembali</span></a></li>
-            <br>
             <li><a href="{{route('home')}}"><i class="bx bx-home"></i> <span>Beranda</span></a></li>
             <br>
             <li><a href="{{route('profil')}}"><i class="bx bx-user"></i> <span>Profil</span></a></li>
