@@ -35,4 +35,3 @@ Route::match(['get', 'post'], '/{brand}/{detail}', [LineUp::class, 'detail'])->n
 
 Route::get('/{brand}/{detail}/interiorExterior', [LineUp::class, 'interiorExterior'])->name('interiorExterior');
 Route::get('/{brand}/{detail}/testDrive', [LineUp::class, 'testDrive'])->name('testDrive');
-Route::get('/{brand}/{detail}/penawaran', [LineUp::class, 'penawaran'])->name('penawaran');

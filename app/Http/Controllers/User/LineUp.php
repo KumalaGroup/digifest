@@ -71,12 +71,4 @@ class LineUp extends Backend
             'data' => $result
         ]);
     }
-    public function penawaran($brand, $detail)
-    {
-        $backgroundImage = "hero-bg.jpg";
-        return view('user.lineUp.penawaran', [
-            'sectionTitle' => urldecode($detail),
-            'backgroundImage' => $backgroundImage
-        ]);
-    }
 }
