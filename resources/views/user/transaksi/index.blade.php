@@ -202,11 +202,11 @@
         jumlah_origin[index] = jumlah_temp[index] = jumlah.html();
         aksi_temp = aksi.html();
         jumlah.html(`
-            <form class="php-email-form editform">
+            <div class="php-email-form">
                 <div class="form-group row mb-0">
                     <input type="number" class="form-control jumlah" value="` + jumlah_temp[index] + `" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
                 </div>
-            </form>
+            </div>
         `);
         aksi.html(`
             <a href="javascript:void(0)" class="badge badge-primary save" data-id="` + $(this).data('id') + `" data-unit="` + $(this).data('unit') + `">Simpan</a>
@@ -268,8 +268,10 @@
     });
     $('#tabelRiwayat').on('click', 'tr', function() {
         var inv = $(this).find('td').eq(1);
-        var data = btoa(JSON.stringify([inv.html()]));
-        location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
+        if (inv.html() !== undefined) {
+            var data = btoa(JSON.stringify([inv.html()]));
+            location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
+        }
     });
 
 </script>
