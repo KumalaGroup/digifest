@@ -179,11 +179,10 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         if (form.valid()) {
             $(this).prop('disabled', true);
             var data = form.serialize();
-            var data = await $.post(location, data);
-            data = JSON.parse(data);
+            var response = await $.post(location, data);
             $(this).prop('disabled', false);
-            alert(data.msg);
-            if (data.status == "success") form.trigger('reset');
+            alert(response.msg);
+            if (response.status == "success") form.trigger('reset');
         }
     });
     $('#buy').on('click', async function(e) {
@@ -192,12 +191,11 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         if (form.valid()) {
             $(this).prop('disabled', true);
             var data = form.serialize();
-            var data = await $.post(location, data);
-            data = JSON.parse(data);
+            var response = await $.post(location, data);
             $(this).prop('disabled', false);
-            alert(data.msg);
-            if (data.status == "success") {
-                var id = btoa(JSON.stringify([data.id]));
+            alert(response.msg);
+            if (response.status == "success") {
+                var id = btoa(JSON.stringify([response.id]));
                 location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + id);
             }
         }

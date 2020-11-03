@@ -11,7 +11,7 @@ class Home extends Backend
     {
         if ($request->has('rundown')) {
             $result = get(parent::$urlApi . "digifest_rundown/" . $request->date);
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $result = get(parent::$urlApi . "digifest_main");
             $backgroundImage = "hero-bg.jpg";
@@ -35,7 +35,7 @@ class Home extends Backend
                 $data['tanggal_lahir'] = tgl_sql($data['tanggal_lahir']);
                 $result = post(parent::$urlApi . "digifest_profil", $data);
             }
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
             return view('user.home.profil', [

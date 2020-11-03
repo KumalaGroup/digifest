@@ -26,7 +26,7 @@ class LineUp extends Backend
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
             $data['customer'] = $request->session()->get('id');
             $result = post(parent::$urlApi . "digifest_cart", $data);
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $detail = urldecode($detail);
             $backgroundImage = "hero-bg.jpg";

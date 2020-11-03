@@ -86,7 +86,21 @@
                                         <tr>
                                             <td width="200">Uang Tanda Jadi</td>
                                             <td width="20">:</td>
-                                            <td>IDR {{formatRupiah($data->detail->uang_muka)}},-</td>
+                                            <th>IDR {{formatRupiah($data->detail->uang_muka)}},-</th>
+                                        </tr>
+                                        <tr>
+                                            <td width="200">Cabang Tujuan</td>
+                                            <td width="20">:</td>
+                                            <td>{{$data->rekening->lokasi.' - '.$data->rekening->nama_perusahaan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="200">Status Pembayaran</td>
+                                            <td width="20">:</td>
+                                            <td>
+                                                {!!$data->detail->status==0
+                                                ?'<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>'
+                                                :'<a href="javascript:void(0)" class="badge badge-success">Selesai</a>'!!}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -116,10 +130,41 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {{-- <div class="form-group text-center">
-                                <div class="zoom_img mt-4 mb-4"><button id="checkout" class="btn_round">Checkout</button></div>
-                            </div> --}}
                         </div>
+                        @if($data->detail->status==0)
+                        <div class="col-md-12 portfolio-item">
+                            <h3 class="resume-title">Petunjuk Pembayaran</h3>
+                            <div class="resume-item">
+                                <h4 style="color:#45505b;">Silahkan melakukan pembayaran ke rekening cabang tujuan dibawah ini:</h4>
+                                <table class="table table-condensed table-borderless text-left">
+                                    <tbody>
+                                        <tr>
+                                            <td width="200">Nama Bank</td>
+                                            <td width="20">:</td>
+                                            <td>Bank Mandiri</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="200">Nama Pemilik Rekening</td>
+                                            <td width="20">:</td>
+                                            <td>{{$data->rekening->nama_perusahaan}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="200">No. Rekening</td>
+                                            <td width="20">:</td>
+                                            <td>{{$data->rekening->no_rekening}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p style="color:#45505b;"><strong>
+                                        Dalam 1 x 24 jam kami tidak menerima konfirmasi pembayaran, maka kami anggap transaksi pembelian anda batal. <br>
+                                        Harap untuk melakukan konfirmasi kepada kami, silahkan klik tombol dibawah untuk melakukan konfirmasi pembayaran, terima kasih.
+                                    </strong></p>
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="zoom_img mt-4 mb-4"><button id="confirm" class="btn_round">Konfirmasi Pembayaran</button></div>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -130,7 +175,10 @@
 
 @section('js')
 <script>
-    $('#tanggal').html(formatHariTanggal(new Date('{{$data->detail->created_at}}')))
+    $('#tanggal').html(formatHariTanggal(new Date('{{$data->detail->created_at}}')));
+    $('#confirm').on('click', function() {
+        location.replace(`{{route('transaksiConfirm')}}?kdinvdg={{Request::get('kdinvdg')}}`);
+    });
 
 </script>
 @endsection

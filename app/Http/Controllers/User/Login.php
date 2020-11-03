@@ -21,7 +21,7 @@ class Login extends Frontend
                     'nama' => $result->data->nama,
                     'email' => $result->data->email
                 ]);
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $backgroundImage = "hero-bg.jpg";
             return view('user.login.login', [
@@ -36,7 +36,7 @@ class Login extends Frontend
             foreach ($request->all() as $k => $v)
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
             $result = post(parent::$urlApi . 'digifest_register', $data);
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $backgroundImage = "hero-bg.jpg";
             return view('user.login.daftar', [

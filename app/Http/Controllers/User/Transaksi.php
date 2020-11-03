@@ -14,7 +14,7 @@ class Transaksi extends Backend
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
             $data['customer'] = $request->session()->get('id');
             $result = post(parent::$urlApi . 'digifest_cart', $data);
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
             $result = (object) array(
                 "cart" => get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id')),
@@ -52,11 +52,14 @@ class Transaksi extends Backend
                 if ($request->hasFile('foto_reklis'))
                     $request->foto_reklis->move('../assets/img_marketing/checkout', $data['foto_reklis']);
             }
-            return json_encode($result, JSON_PRETTY_PRINT);
+            return response()->json($result);
         } else {
-            if ($request->has('provinsi')) {
-                $result = get(parent::$urlApi . "digifest_provinsi");
-                return json_encode($result, JSON_PRETTY_PRINT);
+            if ($request->has('loadData')) {
+                $result = array(
+                    'provinsi' => get(parent::$urlApi . "digifest_provinsi"),
+                    'cabang' => get(parent::$urlApi . "digifest_cabang/" . $request->brand)
+                );
+                return response()->json($result);
             } elseif ($request->has('kd')) {
                 $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
                 return view('user.transaksi.create', ['data' => $result]);
@@ -68,5 +71,10 @@ class Transaksi extends Backend
         $result = get(parent::$urlApi . 'digifest_riwayat/' .
             $request->session()->get('id') . '/' . $request->kdinvdg);
         return view('user.transaksi.detail', ['data' => $result]);
+    }
+
+    public function confirm()
+    {
+        return view('user.transaksi.confirm');
     }
 }

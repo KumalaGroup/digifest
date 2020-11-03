@@ -73,11 +73,10 @@
         var data = form.serialize();
         if ($('#form').valid()) {
             $(this).prop('disabled', true);
-            var data = await $.post(location, data);
-            data = JSON.parse(data);
-            if (data.status == "success") location.reload();
+            var response = await $.post(location, data);
+            if (response.status == "success") location.reload();
             else {
-                alert(data.msg);
+                alert(response.msg);
                 $(this).prop('disabled', false);
             }
         }

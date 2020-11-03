@@ -64,7 +64,7 @@
                                         <table class="table table-condensed text-center">
                                             <thead>
                                                 <tr>
-                                                    <th><input type="checkbox" id="checkAll"> &nbsp; Semua</th>
+                                                    <th>{{-- <input type="checkbox" id="checkAll"> &nbsp; Semua --}}</th>
                                                     <th>Brand</th>
                                                     <th>Model</th>
                                                     <th>Jumlah</th>
@@ -122,9 +122,9 @@
                                                     <td>{{$value->item}}</td>
                                                     <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
                                                     <td>
-                                                        {!!$value->status == 0
-                                                        ?'<a href="javascript:void(0)" class="badge badge-warning">Belum Lunas</a>'
-                                                        :'<a href="javascript:void(0)" class="badge badge-success">Lunas</a>'!!}
+                                                        {!!$value->status==0
+                                                        ?'<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>'
+                                                        :'<a href="javascript:void(0)" class="badge badge-success">Selesai</a>'!!}
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -151,47 +151,41 @@
 <script>
     $('tbody').on('click', '.hapus', async function() {
         if (confirm('Apakah anda yakin? Data akan dihapus')) {
-            var data = await $.post(location, {
+            var response = await $.post(location, {
                 _token: '{{csrf_token()}}'
                 , id: $(this).data('id')
                 , method: 'delete'
             });
-            data = JSON.parse(data);
-            if (data.status == 'success') {
-                alert(data.msg);
+            if (response.status == 'success') {
+                alert(response.msg);
                 $(this).closest('tr').remove();
             }
         }
     });
     var selectedId = [];
+    var selectedBrand = null;
     var jumlah_origin = [];
     var jumlah_temp = [];
     var aksi_temp;
-    $('#checkAll').on('click', function() {
-        var rows = $('tbody').find('.check');
-        selectedId.length = 0;
-        if ($(this).is(':checked')) {
-            $.each(rows, function() {
-                $(this).prop('checked', true);
-                selectedId.push($(this).val());
-            });
-        } else {
-            selectedId.length = 0;
-            $.each(rows, function() {
-                $(this).prop('checked', false);
-            });
-        }
-    })
     $('tbody').on('click', '.check', function() {
+        var parent = $(this).closest('tr');
         if ($(this).is(':checked')) {
-            var check = $('tbody').find('.check').not(':checked');
+            var brand = parent.find('td').eq(1);
+            if (selectedBrand === null) {
+                selectedBrand = brand.html();
+            }
+            if (selectedBrand != brand.html()) {
+                alert('Tidak dapat memilih brand yang berbeda');
+                return false;
+            }
             selectedId.push($(this).val());
-            if (check.length == 0)
-                $('#checkAll').prop('checked', true);
         } else {
             var index = selectedId.indexOf($(this).val())
             selectedId.splice(index, 1);
-            $('#checkAll').prop('checked', false);
+            var check = $('tbody').find('.check:checked');
+            if (check.length === 0) {
+                selectedBrand = null;
+            }
         }
     });
     $('tbody').on('click', '.edit', function() {
@@ -225,24 +219,23 @@
         var index = parent.index();
         var jumlah = parent.find('td').eq(3);
         var aksi = parent.find('td').eq(4);
-        var data;
+        var response;
         if (jumlah_temp[index] == 0) {
             if (confirm('Apakah anda yakin? Data akan dihapus'))
-                data = await $.post(location, {
+                response = await $.post(location, {
                     _token: '{{csrf_token()}}'
                     , id: $(this).data('id')
                     , method: 'delete'
                 });
             else return false;
-        } else data = await $.post(location, {
+        } else response = await $.post(location, {
             _token: '{{csrf_token()}}'
             , unit: $(this).data('unit')
             , jumlah: jumlah_temp[index]
             , method: 'post'
         });
-        data = JSON.parse(data);
-        if (data.status == 'success') {
-            alert(data.msg);
+        if (response.status == 'success') {
+            alert(response.msg);
             if (jumlah_temp[index] == 0)
                 $(this).closest('tr').remove();
             else {
@@ -263,7 +256,7 @@
         if (selectedId.length == 0) alert(`Silahkan pilih item`)
         else {
             var data = btoa(JSON.stringify(selectedId));
-            location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + data);
+            location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&brand=` + selectedBrand.toLowerCase() + `&query=` + data);
         }
     });
     $('#tabelRiwayat').on('click', 'tr', function() {

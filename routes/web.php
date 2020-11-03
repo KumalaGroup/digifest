@@ -27,6 +27,7 @@ Route::match(['get', 'post'], '/profil', [Home::class, 'profil'])->name('profil'
 Route::match(['get', 'post'], '/transaksi', [Transaksi::class, 'index'])->name('transaksi');
 Route::match(['get', 'post'], '/transaksi/checkout', [Transaksi::class, 'create'])->name('transaksiCheckout');
 Route::get('/transaksi/riwayat', [Transaksi::class, 'detail'])->name('transaksiRiwayat');
+Route::match(['get', 'post'], '/transaksi/confirm', [Transaksi::class, 'confirm'])->name('transaksiConfirm');
 
 Route::get('/keluar', [Home::class, 'logout'])->name('logout');
 
