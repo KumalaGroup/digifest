@@ -193,7 +193,7 @@
             }
             , function(data, textStatus, jqXHR) {
                 $('#rundown').children().remove();
-                if (data != null)
+                if (!isEmpty(data))
                     $.each(data, function(indexInArray, valueOfElement) {
                         $('#rundown').append(`<tr>
                         <td>` + valueOfElement.waktu + `</td>
@@ -212,7 +212,7 @@
         }
         , function(data, textStatus, jqXHR) {
             $('#rundown').children().remove();
-            if (data != null)
+            if (!isEmpty(data))
                 $.each(data, function(indexInArray, valueOfElement) {
                     $('#rundown').append(`<tr>
                     <td>` + valueOfElement.waktu + `</td>
@@ -223,6 +223,14 @@
                     <td>Tidak ada rundown acara</td>
                     </tr>`);
         }, "json");
+
+    function isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
 
 </script>
 @endsection

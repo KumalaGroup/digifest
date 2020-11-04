@@ -51,39 +51,37 @@
                     <form id="form" class="php-email-form mt-5" style="background-color: transparent;">
                         @csrf
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Nama Lengkap</p>
+                            <p class="col-sm-3 my-auto">No. Transaksi</p>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" required readonly />
+                                <input type="text" class="form-control" name="kode" id="kode" placeholder="No. Transaksi" value="{{$no_transaksi}}" required readonly />
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Email</p>
+                            <p class="col-sm-3 my-auto">Tanggal Pembayaran</p>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required readonly />
+                                <input type="text" class="form-control" name="tanggal_bayar" id="tanggal_bayar" placeholder="Tanggal Lahir" autocomplete="off" required readonly />
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">No. Telepon</p>
+                            <p class="col-sm-3 my-auto">Nama Bank</p>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="telepon" id="telepon" placeholder="No. Telepon" required readonly />
+                                <input type="text" class="form-control" name="nama_bank" id="nama_bank" placeholder="Nama Bank" required />
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Provinsi Domisili</p>
+                            <p class="col-sm-3 my-auto">Nama Rekening</p>
                             <div class="col-sm-9">
-                                <select name="provinsi" id="provinsi" class="form-control" required style="width:100%">
-                                    <option value=""></option>
-                                </select>
+                                <input type="text" class="form-control" name="nama_rekening" id="nama_rekening" placeholder="Nama Rekening" required />
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Foto KTP</p>
+                            <p class="col-sm-3 my-auto">Bukti Pembayaran</p>
                             <div class="col-sm-9">
-                                <input type="file" name="foto_ktp" id="foto_ktp" style="padding-top: 8px" />
+                                <input type="file" name="bukti_bayar" id="bukti_bayar" style="padding-top: 8px" required />
                             </div>
                         </div>
                         <div class="form-group text-center">
-                            <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Proses</button></div>
+                            <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Konfirmasi</button></div>
                         </div>
                     </form>
                 </div>
@@ -95,25 +93,30 @@
 
 @section('js')
 <script>
+    $(`#tanggal_bayar`).datepicker({
+        format: `dd-mm-yyyy`
+        , autoclose: true
+        , startDate: '-7d'
+    });
+    $(`#tanggal_bayar`).datepicker(`update`, `{{date('d-m-Y')}}`);
     $('#submit').on('click', async function(e) {
         var breakout = false;
         e.preventDefault();
         var formData = new FormData();
         formData.append('_token', '{{csrf_token()}}');
-        formData.append('checkout', true);
         $.each($('#form').find('.form-control'), function() {
             formData.append($(this).attr('id'), $(this).val());
         });
-        if ($('#foto_ktp')[0].files.length != 0) {
-            var foto_ktp = $('#foto_ktp')[0].files[0];
+        if ($('#bukti_bayar')[0].files.length != 0) {
+            var bukti_bayar = $('#bukti_bayar')[0].files[0];
             var allowed_types = ["jpg", "jpeg", "png"];
-            var ext = foto_ktp.name.split(".").pop().toLowerCase();
-            formData.append('foto_ktp', foto_ktp);
+            var ext = bukti_bayar.name.split(".").pop().toLowerCase();
+            formData.append('bukti_bayar', bukti_bayar);
             if ($.inArray(ext, allowed_types) == -1) {
                 alert("Silahkan pilih file gambar!");
                 breakout = true;
             }
-            if ($('#foto_ktp')[0].files[0].size / 1048576 > 0.3) {
+            if ($('#bukti_bayar')[0].files[0].size / 1048576 > 0.3) {
                 alert("Ukuran file melebihi 300kB!");
                 breakout = true;
             }
@@ -132,8 +135,7 @@
                 $(this).prop('disabled', false);
                 alert(response.msg);
                 if (response.status == "success") {
-                    var data = btoa(JSON.stringify([response.kdinvdg]));
-                    location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
+                    location.replace(`{{route('transaksi')}}`);
                 }
             }
         }

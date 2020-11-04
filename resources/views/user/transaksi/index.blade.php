@@ -122,9 +122,13 @@
                                                     <td>{{$value->item}}</td>
                                                     <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
                                                     <td>
-                                                        {!!$value->status==0
-                                                        ?'<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>'
-                                                        :'<a href="javascript:void(0)" class="badge badge-success">Selesai</a>'!!}
+                                                        @if($value->status==0)
+                                                        <a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>
+                                                        @elseif($value->status==1)
+                                                        <a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>
+                                                        @else
+                                                        <a href="javascript:void(0)" class="badge badge-success">Terverifikasi</a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach

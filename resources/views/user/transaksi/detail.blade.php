@@ -97,9 +97,13 @@
                                             <td width="200">Status Pembayaran</td>
                                             <td width="20">:</td>
                                             <td>
-                                                {!!$data->detail->status==0
-                                                ?'<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>'
-                                                :'<a href="javascript:void(0)" class="badge badge-success">Selesai</a>'!!}
+                                                @if($data->detail->status==0)
+                                                <a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>
+                                                @elseif($data->detail->status==1)
+                                                <a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>
+                                                @else
+                                                <a href="javascript:void(0)" class="badge badge-success">Terverifikasi</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     </tbody>

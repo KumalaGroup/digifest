@@ -73,8 +73,29 @@ class Transaksi extends Backend
         return view('user.transaksi.detail', ['data' => $result]);
     }
 
-    public function confirm()
+    public function confirm(Request $request)
     {
-        return view('user.transaksi.confirm');
+        if ($request->isMethod('post')) {
+            foreach ($request->all() as $k => $v)
+                $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
+            $rand = generateKode(4);
+            $customer = $request->session()->get('id');
+            if ($request->hasFile('bukti_bayar')) {
+                $file = $request->bukti_bayar;
+                $data['bukti_bayar'] = $customer . $rand . date("dmYHis") . 'bukti.' . $file->getClientOriginalExtension();
+            }
+            $result = post(parent::$urlApi . 'digifest_confirm', $data);
+            if ($result->status == "success") {
+                if ($request->hasFile('bukti_bayar')) {
+                    $request->bukti_bayar->move('../assets/img_marketing/checkout/bukti', $data['bukti_bayar']);
+                }
+            }
+            return response()->json($result);
+        } else {
+            $no_transaksi = json_decode(base64_decode($request->kdinvdg));
+            return view('user.transaksi.confirm', array(
+                'no_transaksi' => $no_transaksi[0]
+            ));
+        }
     }
 }
