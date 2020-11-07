@@ -46,7 +46,9 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Interior 360&deg;</h3>
                     @if($data['interior']!=="")
-                    <div class="cloudimage-360" data-folder="{{$baseImg}}otomotif/360in/" data-image-list="[{{htmlspecialchars_decode($data['interior'])}}]" data-bottom-circle data-bottom-circle-offset="2" data-full-screen="true"></div>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{$data['interior']}}" allowfullscreen></iframe>
+                    </div>
                     @else
                     <p>Belum ada gambar</p>
                     @endif

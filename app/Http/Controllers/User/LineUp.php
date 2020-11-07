@@ -44,18 +44,15 @@ class LineUp extends Backend
         $detail = urldecode($detail);
         $backgroundImage = "hero-bg.jpg";
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail) . "/360Img");
-        foreach ($result->interior as $v)
-            $interior[] = "&quot;$v->gambar&quot;";
         foreach ($result->exterior as $v)
             $exterior[] = "&quot;$v->gambar&quot;";
-        $interior = !empty($interior) ? implode(",", $interior) : "";
         $exterior = !empty($exterior) ? implode(",", $exterior) : "";
         return view('user.lineUp.interiorExterior', [
             'sectionTitle' => urldecode($detail),
             'backgroundImage' => $backgroundImage,
             'baseImg' => parent::$baseImg,
             'data' => [
-                'interior' => $interior,
+                'interior' => $result->interior[0]->deskripsi,
                 'exterior' => $exterior
             ]
         ]);
