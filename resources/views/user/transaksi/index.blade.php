@@ -120,7 +120,12 @@
                                                     <td>{{$key+1}}</td>
                                                     <td>{{$value->kode}}</td>
                                                     <td>{{$value->item}}</td>
-                                                    <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
+                                                    <td>
+                                                        @if($value->uangMuka!=$value->potongan)
+                                                        <small style="color:#dc3545"><strike>IDR {{formatRupiah($value->uangMuka)}},-</strike></small>
+                                                        @endif
+                                                        IDR {{formatRupiah($value->potongan)}},-
+                                                    </td>
                                                     <td>
                                                         @if($value->status==0)
                                                         <a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>
