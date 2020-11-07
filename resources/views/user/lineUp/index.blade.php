@@ -64,9 +64,8 @@
                     <div class="portfolio-wrap zoom_img" style="background-color: transparent;">
                         <img src="{{$baseImg.'otomotif/'.$v->gambar}}" width="100%" height="{{count($data)<6?'300px':'200px'}}" style="object-fit: contain;">
                         <a href="{{route('lineUpDetail',['brand'=>Request::segment(1),'detail'=>$uri])}}">
-                            <div class="portfolio-info">
-                                <h3 class="resume-title">{{$v->nama}}</h3>
-                            </div>
+                            <div class="portfolio-info"></div>
+                            <h3 class="resume-title" style="text-align: center;">{{$v->nama}}</h3>
                         </a>
                     </div>
                 </div>
