@@ -79,8 +79,9 @@
                         </div>
                     </div>
                     @endif
+                    <!-- begin:: live zoom meeting -->
                     @if($data->is_zoom==1)
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-lg-12 portfolio-item">
                             <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Zoom Meeting</h3>
                             <div class="resume-item">
@@ -91,8 +92,9 @@
                                 <h5>Waktu : {{formatHariTanggal($data->waktu)['waktu']}}</h5>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     @endif
+                    <!-- end:: live zoom meeting -->
                 </div>
                 <div class="col-lg-4 portfolio-item">
                     <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
