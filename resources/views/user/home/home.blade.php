@@ -45,7 +45,6 @@
     #tanggal {
         cursor: pointer;
     }
-
 </style>
 @endsection
 
@@ -81,7 +80,7 @@
                     @endif
                     <!-- begin:: live zoom meeting -->
                     @if($data->is_zoom==1)
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-lg-12 portfolio-item">
                             <h3 class="resume-title"><i class="bx bx-link-alt"></i> Link Zoom Meeting</h3>
                             <div class="resume-item">
@@ -92,18 +91,21 @@
                                 <h5>Waktu : {{formatHariTanggal($data->waktu)['waktu']}}</h5>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     @endif
                     <!-- end:: live zoom meeting -->
-                </div>
-                <div class="col-lg-4 portfolio-item">
-                    <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
-                    <div class="resume-item">
-                        <h4 id="tanggal">06-10-2020</h4>
-                        <table class="table table-condensed">
-                            <tbody id="rundown"></tbody>
-                        </table>
+
+                    <!-- begin:: rundown -->
+                    <div class="col-lg-12 portfolio-item">
+                        <h3 class="resume-title"><i class="bx bx-collection"></i> Rundown</h3>
+                        <div class="resume-item">
+                            <h4 id="tanggal">06-10-2020</h4>
+                            <table class="table table-condensed">
+                                <tbody id="rundown"></tbody>
+                            </table>
+                        </div>
                     </div>
+                    <!-- end:: rundown -->
                 </div>
             </div>
             <div class="row">
@@ -171,60 +173,58 @@
 @section('js')
 <script>
     $.fn.datepicker.dates['id'] = {
-        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
-        , daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
-        , daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
-        , months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
-        , monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
-        , today: "Today"
-        , clear: "Clear"
-        , format: "mm/dd/yyyy"
-        , titleFormat: "MM yyyy"
-        , weekStart: 0
+        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
+        months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
+        today: "Today",
+        clear: "Clear",
+        format: "mm/dd/yyyy",
+        titleFormat: "MM yyyy",
+        weekStart: 0
     };
     $('#tanggal').datepicker({
-        format: `yyyy-mm-dd`
-        , autoclose: true
-        , language: `id`
-        , todayHighlight: true
+        format: `yyyy-mm-dd`,
+        autoclose: true,
+        language: `id`,
+        todayHighlight: true
     }).on("changeDate", function(e) {
         $('#tanggal').html(formatHariTanggal(e.date));
         $.get(location, {
-                rundown: true
-                , date: formatDate(e.date)
-            }
-            , function(data, textStatus, jqXHR) {
-                $('#rundown').children().remove();
-                if (!isEmpty(data))
-                    $.each(data, function(indexInArray, valueOfElement) {
-                        $('#rundown').append(`<tr>
-                        <td>` + valueOfElement.waktu + `</td>
-                        <td>` + valueOfElement.judul + `</td>
-                        </tr>`);
-                    });
-                else $('#rundown').append(`<tr>
-                        <td>Tidak ada rundown acara</td>
-                        </tr>`);
-            }, "json");
-    });
-    $('#tanggal').html(formatHariTanggal(new Date()));
-    $.get(location, {
-            rundown: true
-            , date: formatDate(new Date())
-        }
-        , function(data, textStatus, jqXHR) {
+            rundown: true,
+            date: formatDate(e.date)
+        }, function(data, textStatus, jqXHR) {
             $('#rundown').children().remove();
             if (!isEmpty(data))
                 $.each(data, function(indexInArray, valueOfElement) {
                     $('#rundown').append(`<tr>
+                        <td>` + valueOfElement.waktu + `</td>
+                        <td>` + valueOfElement.judul + `</td>
+                        </tr>`);
+                });
+            else $('#rundown').append(`<tr>
+                        <td>Tidak ada rundown acara</td>
+                        </tr>`);
+        }, "json");
+    });
+    $('#tanggal').html(formatHariTanggal(new Date()));
+    $.get(location, {
+        rundown: true,
+        date: formatDate(new Date())
+    }, function(data, textStatus, jqXHR) {
+        $('#rundown').children().remove();
+        if (!isEmpty(data))
+            $.each(data, function(indexInArray, valueOfElement) {
+                $('#rundown').append(`<tr>
                     <td>` + valueOfElement.waktu + `</td>
                     <td>` + valueOfElement.judul + `</td>
                     </tr>`);
-                });
-            else $('#rundown').append(`<tr>
+            });
+        else $('#rundown').append(`<tr>
                     <td>Tidak ada rundown acara</td>
                     </tr>`);
-        }, "json");
+    }, "json");
 
     function isEmpty(obj) {
         for (var key in obj) {
@@ -233,6 +233,5 @@
         }
         return true;
     }
-
 </script>
 @endsection
