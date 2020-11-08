@@ -235,6 +235,9 @@
         , serverSide: true
         , order: []
         , responsive: true
+        , language: {
+            search: 'No. Transaksi :'
+        }
         , ajax: {
             type: 'post'
             , url: location
