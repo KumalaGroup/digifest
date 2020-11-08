@@ -10,16 +10,17 @@ class Transaksi extends Backend
     public function index(Request $request)
     {
         if ($request->isMethod('post')) {
-            foreach ($request->all() as $k => $v)
-                $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
-            $data['customer'] = $request->session()->get('id');
-            $result = post(parent::$urlApi . 'digifest_cart', $data);
+            if ($request->has('datatable')) {
+                $result = post(parent::$urlApi . 'digifest_riwayat/' . $request->session()->get('id'), $_POST);
+            } else {
+                foreach ($request->all() as $k => $v)
+                    $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
+                $data['customer'] = $request->session()->get('id');
+                $result = post(parent::$urlApi . 'digifest_cart', $data);
+            }
             return response()->json($result);
         } else {
-            $result = (object) array(
-                "cart" => get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id')),
-                "riwayat" => get(parent::$urlApi . 'digifest_riwayat/' . $request->session()->get('id'))
-            );
+            $result =  get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id'));
             return view('user.transaksi.index', ['data' => $result]);
         }
     }
