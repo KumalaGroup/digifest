@@ -23,9 +23,9 @@ class Login extends Frontend
                 ]);
             return response()->json($result);
         } else {
-            $backgroundImage = "hero-bg.jpg";
+            $result = get(parent::$urlApi . "bg_login");
             return view('user.login.login', [
-                'backgroundImage' => $backgroundImage
+                'backgroundImage' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar
             ]);
         }
     }
@@ -38,9 +38,9 @@ class Login extends Frontend
             $result = post(parent::$urlApi . 'digifest_register', $data);
             return response()->json($result);
         } else {
-            $backgroundImage = "hero-bg.jpg";
+            $result = get(parent::$urlApi . "bg_login");
             return view('user.login.daftar', [
-                'backgroundImage' => $backgroundImage
+                'backgroundImage' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar
             ]);
         }
     }

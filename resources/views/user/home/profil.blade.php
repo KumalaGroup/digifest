@@ -23,6 +23,30 @@
 
 @section('style')
 <style>
+    /* begin:: untuk background dinamis */
+    body {
+        width: 100%;
+        height: 100vh;
+        background: url("{{$backgroundImage}}") top right no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* end:: untuk background dinamis */
+
+    /* begin:: untuk overlay */
+    /* body:before {
+        content: "";
+        background: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        z-index: -1;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    } */
+    /* end:: untuk overlay */
+    
     .form-control[readonly] {
         background-color: #fff;
     }
@@ -33,7 +57,6 @@
         margin: 0;
         font-size: 10pt;
     }
-
 </style>
 @endsection
 
@@ -171,10 +194,10 @@
 @section('js')
 <script>
     $(`#tanggal_lahir`).datepicker({
-        format: `dd-mm-yyyy`
-        , startView: 2
-        , autoclose: true
-        , startDate: new Date('1970-01-01')
+        format: `dd-mm-yyyy`,
+        startView: 2,
+        autoclose: true,
+        startDate: new Date('1970-01-01')
     });
     $(`#tanggal_lahir`).datepicker(`update`, `{{tgl_sql($data->tanggal_lahir)}}`);
     $(`#agama`).val(`{{$data->agama}}`);
@@ -186,11 +209,10 @@
         if (form.valid()) {
             var data = form.serialize();
             $(this).prop('disabled', true);
-            $.post(location, data
-                , function(data, textStatus, jqXHR) {
-                    $('#submit').prop('disabled', false);
-                    alert(data.msg);
-                }, "json");
+            $.post(location, data, function(data, textStatus, jqXHR) {
+                $('#submit').prop('disabled', false);
+                alert(data.msg);
+            }, "json");
         }
     });
     $('#submitPass').click(function(e) {
@@ -203,12 +225,11 @@
                 return false;
             }
             $(this).prop('disabled', true);
-            $.post(location, data
-                , function(data, textStatus, jqXHR) {
-                    $('#submitPass').prop('disabled', false);
-                    alert(data.msg);
-                    if (data.status == "success") $('#formPass').trigger('reset');
-                }, "json");
+            $.post(location, data, function(data, textStatus, jqXHR) {
+                $('#submitPass').prop('disabled', false);
+                alert(data.msg);
+                if (data.status == "success") $('#formPass').trigger('reset');
+            }, "json");
         }
     });
 
@@ -232,18 +253,17 @@
             return false;
         }
         $.ajax({
-            type: 'post'
-            , url: location
-            , data: formData
-            , processData: false
-            , contentType: false
-            , dataType: 'json'
-            , success: function(response) {
+            type: 'post',
+            url: location,
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(response) {
                 alert(response.msg);
                 if (response.status == "success") $('#profilImg').attr('src', `{{$baseImg}}customer/` + response.img);
             }
         });
     });
-
 </script>
 @endsection

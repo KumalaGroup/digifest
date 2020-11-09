@@ -23,17 +23,21 @@
 
 @section('style')
 <style>
-    /* body {
+    /* begin:: untuk background dinamis */
+    body {
         width: 100%;
         height: 100vh;
-        background: url("{{asset('assets/img/'.$backgroundImage)}}") top right no-repeat;
+        background: url("{{$backgroundImage}}") top right no-repeat;
         background-size: cover;
         background-attachment: fixed;
     }
 
-    body:before {
+    /* end:: untuk background dinamis */
+
+    /* begin:: untuk overlay */
+    /* body:before {
         content: "";
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.5);
         position: fixed;
         z-index: -1;
         bottom: 0;
@@ -41,6 +45,7 @@
         left: 0;
         right: 0;
     } */
+    /* end:: untuk overlay */
 
     #tanggal {
         cursor: pointer;

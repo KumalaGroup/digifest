@@ -32,13 +32,36 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
 
 @section('style')
 <style>
+    /* begin:: untuk background dinamis */
+    body {
+        width: 100%;
+        height: 100vh;
+        background: url("{{$backgroundImage}}") top right no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* end:: untuk background dinamis */
+
+    /* begin:: untuk overlay */
+    /* body:before {
+        content: "";
+        background: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        z-index: -1;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    } */
+    /* end:: untuk overlay */
+    
     .error {
         color: red;
         padding-top: 5px;
         margin: 0;
         font-size: 10pt;
     }
-
 </style>
 @endsection
 
@@ -157,14 +180,14 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
 @section('js')
 <script>
     $('.owl-carousel').owlCarousel({
-        items: 1
-        , margin: 10
-        , loop: false
-        , nav: false
-        , dots: false
-        , mouseDrag: false
-        , touchDrag: false
-        , autoHeight: true
+        items: 1,
+        margin: 10,
+        loop: false,
+        nav: false,
+        dots: false,
+        mouseDrag: false,
+        touchDrag: false,
+        autoHeight: true
     });
     $('#pilihan_warna a').click(function() {
         $('.owl-carousel').trigger('to.owl.carousel', [$(this).index()]);
@@ -200,6 +223,5 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             }
         }
     });
-
 </script>
 @endsection

@@ -20,7 +20,7 @@ class Transaksi extends Backend
                 "cart" => get(parent::$urlApi . 'digifest_cart/' . $request->session()->get('id')),
                 "riwayat" => get(parent::$urlApi . 'digifest_riwayat/' . $request->session()->get('id'))
             );
-            return view('user.transaksi.index', ['data' => $result]);
+            return view('user.transaksi.index', ['data' => $result, 'backgroundImage' => $this->background]);
         }
     }
     public function create(Request $request)
@@ -62,7 +62,7 @@ class Transaksi extends Backend
                 return response()->json($result);
             } elseif ($request->has('kd')) {
                 $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
-                return view('user.transaksi.create', ['data' => $result]);
+                return view('user.transaksi.create', ['data' => $result, 'backgroundImage' => $this->background]);
             }
         }
     }
@@ -70,7 +70,7 @@ class Transaksi extends Backend
     {
         $result = get(parent::$urlApi . 'digifest_riwayat/' .
             $request->session()->get('id') . '/' . $request->kdinvdg);
-        return view('user.transaksi.detail', ['data' => $result]);
+        return view('user.transaksi.detail', ['data' => $result, 'backgroundImage' => $this->background]);
     }
 
     public function confirm(Request $request)
@@ -94,7 +94,8 @@ class Transaksi extends Backend
         } else {
             $no_transaksi = json_decode(base64_decode($request->kdinvdg));
             return view('user.transaksi.confirm', array(
-                'no_transaksi' => $no_transaksi[0]
+                'no_transaksi' => $no_transaksi[0],
+                'backgroundImage' => $this->background
             ));
         }
     }

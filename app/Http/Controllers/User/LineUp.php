@@ -10,11 +10,10 @@ class LineUp extends Backend
     public function index($brand)
     {
         $sectionTitle = "Line Up " . ucwords($brand);
-        $backgroundImage = "hero-bg.jpg";
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}");
         return view('user.lineUp.index', [
             'sectionTitle' => $sectionTitle,
-            'backgroundImage' => $backgroundImage,
+            'backgroundImage' => $this->background,
             'baseImg' => parent::$baseImg,
             'data' => $result
         ]);
@@ -29,11 +28,11 @@ class LineUp extends Backend
             return response()->json($result);
         } else {
             $detail = urldecode($detail);
-            $backgroundImage = "hero-bg.jpg";
+
             $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
             return view('user.lineUp.detail', [
                 'sectionTitle' => $detail,
-                'backgroundImage' => $backgroundImage,
+                'backgroundImage' => $this->background,
                 'baseImg' => parent::$baseImg,
                 'data' => $result
             ]);
@@ -42,7 +41,6 @@ class LineUp extends Backend
     public function interiorExterior($brand, $detail)
     {
         $detail = urldecode($detail);
-        $backgroundImage = "hero-bg.jpg";
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail) . "/360Img");
         foreach ($result->interior as $v)
             $interior[] = "&quot;$v->gambar&quot;";
@@ -52,7 +50,7 @@ class LineUp extends Backend
         $exterior = !empty($exterior) ? implode(",", $exterior) : "";
         return view('user.lineUp.interiorExterior', [
             'sectionTitle' => urldecode($detail),
-            'backgroundImage' => $backgroundImage,
+            'backgroundImage' => $this->background,
             'baseImg' => parent::$baseImg,
             'data' => [
                 'interior' => $interior,
@@ -63,11 +61,10 @@ class LineUp extends Backend
     public function testDrive($brand, $detail)
     {
         $detail = urldecode($detail);
-        $backgroundImage = "hero-bg.jpg";
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail) . "/360Drive");
         return view('user.lineUp.testDrive', [
             'sectionTitle' => urldecode($detail),
-            'backgroundImage' => $backgroundImage,
+            'backgroundImage' => $this->background,
             'data' => $result
         ]);
     }

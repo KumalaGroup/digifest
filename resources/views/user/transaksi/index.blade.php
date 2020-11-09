@@ -23,6 +23,30 @@
 
 @section('style')
 <style>
+    /* begin:: untuk background dinamis */
+    body {
+        width: 100%;
+        height: 100vh;
+        background: url("{{$backgroundImage}}") top right no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* end:: untuk background dinamis */
+
+    /* begin:: untuk overlay */
+    /* body:before {
+        content: "";
+        background: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        z-index: -1;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    } */
+    /* end:: untuk overlay */
+    
     .form-control[readonly] {
         background-color: #fff;
     }
@@ -37,7 +61,6 @@
     #tabelRiwayat tr:hover {
         cursor: pointer;
     }
-
 </style>
 @endsection
 
@@ -156,9 +179,9 @@
     $('tbody').on('click', '.hapus', async function() {
         if (confirm('Apakah anda yakin? Data akan dihapus')) {
             var response = await $.post(location, {
-                _token: '{{csrf_token()}}'
-                , id: $(this).data('id')
-                , method: 'delete'
+                _token: '{{csrf_token()}}',
+                id: $(this).data('id'),
+                method: 'delete'
             });
             if (response.status == 'success') {
                 alert(response.msg);
@@ -227,16 +250,16 @@
         if (jumlah_temp[index] == 0) {
             if (confirm('Apakah anda yakin? Data akan dihapus'))
                 response = await $.post(location, {
-                    _token: '{{csrf_token()}}'
-                    , id: $(this).data('id')
-                    , method: 'delete'
+                    _token: '{{csrf_token()}}',
+                    id: $(this).data('id'),
+                    method: 'delete'
                 });
             else return false;
         } else response = await $.post(location, {
-            _token: '{{csrf_token()}}'
-            , unit: $(this).data('unit')
-            , jumlah: jumlah_temp[index]
-            , method: 'post'
+            _token: '{{csrf_token()}}',
+            unit: $(this).data('unit'),
+            jumlah: jumlah_temp[index],
+            method: 'post'
         });
         if (response.status == 'success') {
             alert(response.msg);
@@ -270,6 +293,5 @@
             location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
         }
     });
-
 </script>
 @endsection

@@ -25,6 +25,30 @@
 
 @section('style')
 <style>
+    /* begin:: untuk background dinamis */
+    body {
+        width: 100%;
+        height: 100vh;
+        background: url("{{$backgroundImage}}") top right no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* end:: untuk background dinamis */
+
+    /* begin:: untuk overlay */
+    /* body:before {
+        content: "";
+        background: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        z-index: -1;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+    } */
+    /* end:: untuk overlay */
+    
     .form-control[readonly] {
         background-color: #fff;
     }
@@ -35,7 +59,6 @@
         margin: 0;
         font-size: 10pt;
     }
-
 </style>
 @endsection
 
@@ -133,14 +156,14 @@
         loadData: true
     }, function(response) {
         $('#provinsi').select2({
-            data: response.provinsi
-            , placeholder: "-- Pilih provinsi domisili --"
-            , allowClear: true
+            data: response.provinsi,
+            placeholder: "-- Pilih provinsi domisili --",
+            allowClear: true
         });
         $('#cabang_tujuan').select2({
-            data: response.cabang
-            , placeholder: "-- Pilih cabang tujuan --"
-            , allowClear: true
+            data: response.cabang,
+            placeholder: "-- Pilih cabang tujuan --",
+            allowClear: true
         });
     }, 'json');
     $('#provinsi').on('change', function() {
@@ -205,11 +228,11 @@
             if ($('#form').valid()) {
                 $(this).prop('disabled', true);
                 var response = await $.ajax({
-                    type: 'post'
-                    , url: location
-                    , data: formData
-                    , processData: false
-                    , contentType: false
+                    type: 'post',
+                    url: location,
+                    data: formData,
+                    processData: false,
+                    contentType: false
                 });
                 $(this).prop('disabled', false);
                 alert(response.msg);
@@ -220,6 +243,5 @@
             }
         }
     });
-
 </script>
 @endsection
