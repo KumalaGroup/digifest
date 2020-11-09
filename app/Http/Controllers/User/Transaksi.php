@@ -35,23 +35,23 @@ class Transaksi extends Backend
                 $file = $request->foto_ktp;
                 $data['foto_ktp'] = $customer . $rand . date("dmYHis") . 'ktp.' . $file->getClientOriginalExtension();
             }
-            if ($request->hasFile('foto_kk')) {
-                $file = $request->foto_kk;
-                $data['foto_kk'] = $customer . $rand . date("dmYHis") . 'kk.' . $file->getClientOriginalExtension();
-            }
-            if ($request->hasFile('foto_reklis')) {
-                $file = $request->foto_reklis;
-                $data['foto_reklis'] = $customer . $rand . date("dmYHis") . 'reklis.' . $file->getClientOriginalExtension();
-            }
+            // if ($request->hasFile('foto_kk')) {
+            //     $file = $request->foto_kk;
+            //     $data['foto_kk'] = $customer . $rand . date("dmYHis") . 'kk.' . $file->getClientOriginalExtension();
+            // }
+            // if ($request->hasFile('foto_reklis')) {
+            //     $file = $request->foto_reklis;
+            //     $data['foto_reklis'] = $customer . $rand . date("dmYHis") . 'reklis.' . $file->getClientOriginalExtension();
+            // }
             $data['customer'] = $customer;
             $result = post(parent::$urlApi . 'digifest_checkout', $data);
             if ($result->status == "success") {
                 if ($request->hasFile('foto_ktp'))
                     $request->foto_ktp->move('../assets/img_marketing/checkout', $data['foto_ktp']);
-                if ($request->hasFile('foto_kk'))
-                    $request->foto_kk->move('../assets/img_marketing/checkout', $data['foto_kk']);
-                if ($request->hasFile('foto_reklis'))
-                    $request->foto_reklis->move('../assets/img_marketing/checkout', $data['foto_reklis']);
+                // if ($request->hasFile('foto_kk'))
+                //     $request->foto_kk->move('../assets/img_marketing/checkout', $data['foto_kk']);
+                // if ($request->hasFile('foto_reklis'))
+                //     $request->foto_reklis->move('../assets/img_marketing/checkout', $data['foto_reklis']);
             }
             return response()->json($result);
         } else {
