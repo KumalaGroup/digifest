@@ -55,6 +55,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         right: 0;
     } */
     /* end:: untuk overlay */
+
 </style>
 @endsection
 
@@ -68,7 +69,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Test Drive Virtual</h3>
-                    @if(!empty($data) && $data[0]->deskripsi != ' ')
+                    @if(!empty($data) && trim($data[0]->deskripsi) != '')
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="{{trim($data[0]->deskripsi)}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
