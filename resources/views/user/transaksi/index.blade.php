@@ -95,8 +95,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if(!empty($data->cart))
-                                                @foreach($data->cart as $value)
+                                                @if(!empty($data))
+                                                @foreach($data as $value)
                                                 <tr>
                                                     <td><input type="checkbox" value="{{$value->id}}" class="check"></td>
                                                     <td>{{ucwords($value->brand)}}</td>
@@ -126,41 +126,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive mt-5">
-                                        <table id="tabelRiwayat" class="table table-condensed text-center table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>No. Transaksi</th>
-                                                    <th>Jumlah</th>
-                                                    <th>Uang Tanda Jadi</th>
-                                                    <th>Status Pembayaran</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @if(!empty($data->riwayat))
-                                                @foreach($data->riwayat as $key=>$value)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{$value->kode}}</td>
-                                                    <td>{{$value->item}}</td>
-                                                    <td>IDR {{formatRupiah($value->uang_muka)}},-</td>
-                                                    <td>
-                                                        @if($value->status==0)
-                                                        <a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>
-                                                        @elseif($value->status==1)
-                                                        <a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>
-                                                        @else
-                                                        <a href="javascript:void(0)" class="badge badge-success">Terverifikasi</a>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                                @else
-                                                <tr>
-                                                    <td colspan="5">Belum ada data</td>
-                                                </tr>
-                                                @endif
-                                            </tbody>
+                                        <table id="tabelRiwayat" class="table table-condensed text-center table-hover" width="100%">
                                         </table>
                                     </div>
                                 </div>
@@ -286,6 +252,64 @@
             location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&brand=` + selectedBrand.toLowerCase() + `&query=` + data);
         }
     });
+
+    var datatable = $('#tabelRiwayat').DataTable({
+        processing: true
+        , serverSide: true
+        , order: []
+        , responsive: true
+        , language: {
+            search: 'No. Transaksi :'
+        }
+        , ajax: {
+            type: 'post'
+            , url: location
+            , data: function(data) {
+                data.datatable = true;
+                data._token = '{{csrf_token()}}'
+            }
+        }
+        , columns: [{
+            data: null
+            , title: 'No'
+            , width: 35
+            , orderable: false
+            , render: function(data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }
+        , }, {
+            data: 'kode'
+            , title: 'No. Transaksi'
+        , }, {
+            data: 'item'
+            , title: 'Jumlah'
+        , }, {
+            data: null
+            , title: 'Uang Tanda Jadi'
+            , searchable: false
+            , render: function(data, type, row, meta) {
+                var uangMuka = '';
+                if (data.uangMuka != data.potongan) {
+                    uangMuka = `<small style="color:#dc3545"><strike>IDR ` + data.uangMuka + `,-</strike></small> `
+                }
+                return uangMuka + `IDR ` + data.potongan + `,-`;
+            }
+        , }, {
+            data: null
+            , title: 'Status Pembayaran'
+            , searchable: false
+            , render: function(data, type, row, meta) {
+                if (data.status == 0) {
+                    return `<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>`
+                } else if (data.status == 1) {
+                    return `<a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>`
+                } else {
+                    return `<a href = "javascript:void(0)" class="badge badge-success">Terverifikasi</a>`
+                }
+            }
+        , }, ]
+    , });
+
     $('#tabelRiwayat').on('click', 'tr', function() {
         var inv = $(this).find('td').eq(1);
         if (inv.html() !== undefined) {

@@ -109,7 +109,15 @@
                                         <tr>
                                             <td width="200">Uang Tanda Jadi</td>
                                             <td width="20">:</td>
-                                            <th>IDR {{formatRupiah($data->detail->uang_muka)}},-</th>
+                                            <th>
+                                                @php
+                                                $potongan=$data->detail->uang_muka-$data->detail->diskon;
+                                                @endphp
+                                                @if($data->detail->uang_muka!=$potongan)
+                                                <small style="color:#dc3545"><strike>IDR {{formatRupiah($data->detail->uang_muka)}},-</strike></small>
+                                                @endif
+                                                IDR {{formatRupiah($potongan)}},-
+                                            </th>
                                         </tr>
                                         <tr>
                                             <td width="200">Cabang Tujuan</td>
@@ -179,6 +187,26 @@
                                             <td width="200">No. Rekening</td>
                                             <td width="20">:</td>
                                             <td>{{$data->rekening->no_rekening}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="200">
+                                                <h3>Total Bayar</h3>
+                                            </td>
+                                            <td width="20">
+                                                <h3>:</h3>
+                                            </td>
+                                            <th>
+                                                <h3>
+                                                    @php
+                                                    $potongan=$data->detail->uang_muka-$data->detail->diskon;
+                                                    @endphp
+                                                    @if($data->detail->uang_muka!=$potongan)
+                                                    <small style="color:#dc3545"><strike>IDR {{formatRupiah($data->detail->uang_muka)}},-</strike></small>
+                                                    @endif
+                                                    <strong> IDR {{formatRupiah($potongan)}},-
+                                                    </strong>
+                                                </h3>
+                                            </th>
                                         </tr>
                                     </tbody>
                                 </table>
