@@ -48,7 +48,7 @@
         right: 0;
     } */
     /* end:: untuk overlay */
-    
+
     .form-control[readonly] {
         background-color: #fff;
     }
@@ -59,6 +59,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -72,7 +73,6 @@
             <div class="row">
                 <div class="col-lg-8 pt-4 pt-lg-0 content portfolio-item mx-auto">
                     <form id="form" class="php-email-form mt-5" style="background-color: transparent;">
-                        @csrf
                         <div class="form-group row mb-1">
                             <p class="col-sm-3 my-auto">No. Transaksi</p>
                             <div class="col-sm-9">
@@ -117,9 +117,9 @@
 @section('js')
 <script>
     $(`#tanggal_bayar`).datepicker({
-        format: `dd-mm-yyyy`,
-        autoclose: true,
-        startDate: '-7d'
+        format: `dd-mm-yyyy`
+        , autoclose: true
+        , startDate: '-7d'
     });
     $(`#tanggal_bayar`).datepicker(`update`, `{{date('d-m-Y')}}`);
     $('#submit').on('click', async function(e) {
@@ -149,11 +149,11 @@
             if ($('#form').valid()) {
                 $(this).prop('disabled', true);
                 var response = await $.ajax({
-                    type: 'post',
-                    url: location,
-                    data: formData,
-                    processData: false,
-                    contentType: false
+                    type: 'post'
+                    , url: location
+                    , data: formData
+                    , processData: false
+                    , contentType: false
                 });
                 $(this).prop('disabled', false);
                 alert(response.msg);
@@ -163,5 +163,6 @@
             }
         }
     });
+
 </script>
 @endsection

@@ -73,7 +73,6 @@
             <div class="row">
                 <div class="col-lg-8 pt-4 pt-lg-0 content portfolio-item mx-auto">
                     <form id="form" class="php-email-form mt-5" style="background-color: transparent;">
-                        @csrf
                         <div class="form-group row mb-1">
                             <p class="col-sm-3 my-auto">Nama Lengkap</p>
                             <div class="col-sm-9">
