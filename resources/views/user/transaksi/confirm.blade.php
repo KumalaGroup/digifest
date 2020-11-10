@@ -92,9 +92,9 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <p class="col-sm-3 my-auto">Nama Rekening</p>
+                            <p class="col-sm-3 my-auto">Nama Pemilik Rekening</p>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="nama_rekening" id="nama_rekening" placeholder="Nama Rekening" required />
+                                <input type="text" class="form-control" name="nama_rekening" id="nama_rekening" placeholder="Nama Pemilik Rekening" required />
                             </div>
                         </div>
                         <div class="form-group row mb-1">
