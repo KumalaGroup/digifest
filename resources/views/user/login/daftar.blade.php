@@ -39,6 +39,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -47,7 +48,6 @@
     <section id="contact" class="contact col-md-12 my-auto">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="row">
-                <div class="col-md-6 col-lg-8"></div>
                 <div class="col-sm-8 col-md-6 col-lg-4 mx-sm-auto mx-md-0 my-auto">
                     <div class="section-title">
                         <h2>Daftar</h2>
@@ -98,5 +98,6 @@
             }, "json");
         }
     });
+
 </script>
 @endsection
