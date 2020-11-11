@@ -27,6 +27,7 @@
             background-attachment: fixed;
         }
     }
+
     /* end:: untuk background dinamis */
 
     /* begin:: untuk overlay */
@@ -48,6 +49,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -81,7 +83,11 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 mx-sm-auto mx-md-0">
                     <p style="font-size: 25px; font-weight: 500;">
-                        Dapatkan <span style="color: #0c5184;"><span style="font-weight: bold;">discount 20%</span> sampai dengan <span style="font-weight: bold;">Rp 500.000,-</span></span> untuk setiap transaksi & berbagai hadiah menarik dengan hanya daftar dan mengikuti <span style="font-weight: bold;">Kumala Digifest 2020</span>.
+                        Dapatkan <span style="color: #0c5184;">
+                            <span style="font-weight: bold;">diskon 20%</span> sampai dengan
+                            <span style="font-weight: bold;">IDR 500.000,-</span></span>
+                        untuk setiap transaksi & berbagai hadiah menarik dengan hanya daftar dan mengikuti
+                        <span style="font-weight: bold;">Kumala Digifest 2020</span>.
                     </p>
                 </div>
             </div>
@@ -106,5 +112,6 @@
             }
         }
     });
+
 </script>
 @endsection
