@@ -55,7 +55,7 @@
 
 @section('content')
 <div class="row h-100 m-0 p-0">
-    <section id="contact" class="contact col-md-12 my-auto">
+    <section id="contact" class="contact col-md-12 mt-auto">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="row">
                 <div class="col-sm-8 col-md-6 col-lg-4 mx-sm-auto mx-md-0">
@@ -78,11 +78,11 @@
         </div>
     </section>
 
-    <section id="contact" class="contact col-md-12 my-auto">
+    <section id="contact" class="contact col-md-12">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 mx-sm-auto mx-md-0">
-                    <p style="font-size: 25px; font-weight: 500;">
+                    <p style="font-size: 20px; font-weight: 500;">
                         Dapatkan <span style="color: #0c5184;">
                             <span style="font-weight: bold;">diskon 20%</span> sampai dengan
                             <span style="font-weight: bold;">IDR 500.000,-</span></span>
