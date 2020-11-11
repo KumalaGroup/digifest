@@ -38,6 +38,7 @@
 
     @yield('content')
 
+    @if(!Route::has(array('login','daftar')))
     <footer id="footer" style="background-color: white;">
         <div class="container mt-3">
             <div class="row">
@@ -61,6 +62,8 @@
             </div>
         </div>
     </footer>
+    @endif
+
     <div id="preloader"></div>
     <a href="https://api.whatsapp.com/send?phone=62081212100700" class="float" target="_blank"> <i class="bx bxl-whatsapp my-float"></i> </a>
 
