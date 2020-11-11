@@ -53,7 +53,7 @@ class LineUp extends Backend
             'backgroundImageM'  => $this->backgroundImageM,
             'baseImg' => parent::$baseImg,
             'data' => [
-                'interior' => $result->interior[0]->deskripsi,
+                'interior' => $result->interior[0]->deskripsi ?? '',
                 'exterior' => $exterior
             ]
         ]);

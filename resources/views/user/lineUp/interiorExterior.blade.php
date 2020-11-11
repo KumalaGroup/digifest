@@ -65,6 +65,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         right: 0;
     } */
     /* end:: untuk overlay */
+
 </style>
 @endsection
 
@@ -78,9 +79,9 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title">Interior 360&deg;</h3>
-                    @if($data['interior']!=="")
+                    @if($data['interior']!=="" && trim($data['interior'])!=="")
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="{{$data['interior']}}" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="{{trim($data['interior'])}}" allowfullscreen></iframe>
                     </div>
                     @else
                     <p>Belum ada gambar</p>

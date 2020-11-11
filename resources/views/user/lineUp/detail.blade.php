@@ -72,6 +72,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -190,14 +191,14 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
 @section('js')
 <script>
     $('.owl-carousel').owlCarousel({
-        items: 1,
-        margin: 10,
-        loop: false,
-        nav: false,
-        dots: false,
-        mouseDrag: false,
-        touchDrag: false,
-        autoHeight: true
+        items: 1
+        , margin: 10
+        , loop: false
+        , nav: false
+        , dots: false
+        , mouseDrag: false
+        , touchDrag: false
+        , autoHeight: true
     });
     $('#pilihan_warna a').click(function() {
         $('.owl-carousel').trigger('to.owl.carousel', [$(this).index()]);
@@ -229,9 +230,10 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             alert(response.msg);
             if (response.status == "success") {
                 var id = btoa(JSON.stringify([response.id]));
-                location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&query=` + id);
+                location.replace(`{{route('transaksiCheckout',['kd'=>generateKode(4)])}}&brand={{Request::segment(1)}}&query=` + id);
             }
         }
     });
+
 </script>
 @endsection
