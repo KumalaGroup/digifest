@@ -36,9 +36,19 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
     body {
         width: 100%;
         height: 100vh;
-        background: url("{{$backgroundImage}}") top right no-repeat;
+        background: url("{{$backgroundImageM}}") top no-repeat;
         background-size: cover;
         background-attachment: fixed;
+    }
+
+    @media only screen and (min-device-width: 768px) {
+        body {
+            width: 100%;
+            height: 100vh;
+            background: url("{{$backgroundImageDT}}") top right no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
     }
 
     /* end:: untuk background dinamis */
@@ -55,7 +65,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         right: 0;
     } */
     /* end:: untuk overlay */
-    
+
     .error {
         color: red;
         padding-top: 5px;

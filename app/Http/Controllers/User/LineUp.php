@@ -13,7 +13,8 @@ class LineUp extends Backend
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}");
         return view('user.lineUp.index', [
             'sectionTitle' => $sectionTitle,
-            'backgroundImage' => $this->background,
+            'backgroundImageDT' => $this->backgroundImageDT,
+            'backgroundImageM'  => $this->backgroundImageM,
             'baseImg' => parent::$baseImg,
             'data' => $result
         ]);
@@ -32,7 +33,8 @@ class LineUp extends Backend
             $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
             return view('user.lineUp.detail', [
                 'sectionTitle' => $detail,
-                'backgroundImage' => $this->background,
+                'backgroundImageDT' => $this->backgroundImageDT,
+                'backgroundImageM'  => $this->backgroundImageM,
                 'baseImg' => parent::$baseImg,
                 'data' => $result
             ]);
@@ -47,7 +49,8 @@ class LineUp extends Backend
         $exterior = !empty($exterior) ? implode(",", $exterior) : "";
         return view('user.lineUp.interiorExterior', [
             'sectionTitle' => urldecode($detail),
-            'backgroundImage' => $this->background,
+            'backgroundImageDT' => $this->backgroundImageDT,
+            'backgroundImageM'  => $this->backgroundImageM,
             'baseImg' => parent::$baseImg,
             'data' => [
                 'interior' => $result->interior[0]->deskripsi,
@@ -61,7 +64,8 @@ class LineUp extends Backend
         $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail) . "/360Drive");
         return view('user.lineUp.testDrive', [
             'sectionTitle' => urldecode($detail),
-            'backgroundImage' => $this->background,
+            'backgroundImageDT' => $this->backgroundImageDT,
+            'backgroundImageM'  => $this->backgroundImageM,
             'data' => $result
         ]);
     }

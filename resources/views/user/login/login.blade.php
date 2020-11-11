@@ -13,11 +13,20 @@
     body {
         width: 100%;
         height: 100vh;
-        background: url("{{$backgroundImage}}") top right no-repeat;
+        background: url("{{$backgroundImageM}}") top no-repeat;
         background-size: cover;
         background-attachment: fixed;
     }
 
+    @media only screen and (min-device-width: 768px) {
+        body {
+            width: 100%;
+            height: 100vh;
+            background: url("{{$backgroundImageDT}}") top right no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    }
     /* end:: untuk background dinamis */
 
     /* begin:: untuk overlay */
@@ -62,6 +71,18 @@
                         <div class="text-center zoom_img mt-4 mb-4"><button id="submit" class="btn_round btn-block">Masuk</button></div>
                         <p class="text-center">Belum punya akun? <a href="{{route('daftar')}}"><strong>Daftar</strong></a></p>
                     </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact col-md-12 my-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 mx-sm-auto mx-md-0">
+                    <p style="font-size: 25px; font-weight: 500;">
+                        Dapatkan <span style="color: #0c5184;"><span style="font-weight: bold;">discount 20%</span> sampai dengan <span style="font-weight: bold;">Rp 500.000,-</span></span> untuk setiap transaksi & berbagai hadiah menarik dengan hanya daftar dan mengikuti <span style="font-weight: bold;">Kumala Digifest 2020</span>.
+                    </p>
                 </div>
             </div>
         </div>

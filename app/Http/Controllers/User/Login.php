@@ -25,7 +25,8 @@ class Login extends Frontend
         } else {
             $result = get(parent::$urlApi . "bg_login");
             return view('user.login.login', [
-                'backgroundImage' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar
+                'backgroundImageDT' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar_dt,
+                'backgroundImageM'  => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar_m
             ]);
         }
     }
@@ -40,7 +41,8 @@ class Login extends Frontend
         } else {
             $result = get(parent::$urlApi . "bg_login");
             return view('user.login.daftar', [
-                'backgroundImage' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar
+                'backgroundImageDT' => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar_dt,
+                'backgroundImageM'  => empty($result) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $result->gambar_m
             ]);
         }
     }

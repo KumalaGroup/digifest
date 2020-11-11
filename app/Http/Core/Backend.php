@@ -6,7 +6,8 @@ use Closure;
 
 class Backend extends Controller
 {
-    public $background;
+    public $backgroundImageDT;
+    public $backgroundImageM;
     
     public function __construct()
     {
@@ -17,7 +18,8 @@ class Backend extends Controller
         $this->_cekRoute();
 
         $backgroundImage = get(parent::$urlApi . "bg_main_stage");
-        $this->background = empty($backgroundImage) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $backgroundImage->gambar;
+        $this->backgroundImageDT = empty($backgroundImage) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $backgroundImage->gambar_dt;
+        $this->backgroundImageM  =  empty($backgroundImage) ? 'https://digitalsynopsis.com/wp-content/uploads/2017/02/beautiful-color-gradients-backgrounds-018-cloudy-knoxville.png' : parent::$baseImg . 'background/' . $backgroundImage->gambar_m;
     }
     function _cekSession()
     {

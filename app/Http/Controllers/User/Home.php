@@ -16,7 +16,8 @@ class Home extends Backend
             $result = get(parent::$urlApi . "digifest_main");
             return view('user.home.home', [
                 'data' => $result,
-                'backgroundImage' => $this->background
+                'backgroundImageDT' => $this->backgroundImageDT,
+                'backgroundImageM'  => $this->backgroundImageM,
             ]);
         }
     }
@@ -38,9 +39,10 @@ class Home extends Backend
         } else {
             $result = get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'));
             return view('user.home.profil', [
-                'baseImg'         => parent::$baseImg,
-                'data'            => $result,
-                'backgroundImage' => $this->background
+                'baseImg'           => parent::$baseImg,
+                'data'              => $result,
+                'backgroundImageDT' => $this->backgroundImageDT,
+                'backgroundImageM'  => $this->backgroundImageM,
             ]);
         }
     }

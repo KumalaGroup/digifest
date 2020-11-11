@@ -29,9 +29,19 @@
     body {
         width: 100%;
         height: 100vh;
-        background: url("{{$backgroundImage}}") top right no-repeat;
+        background: url("{{$backgroundImageM}}") top no-repeat;
         background-size: cover;
         background-attachment: fixed;
+    }
+
+    @media only screen and (min-device-width: 768px) {
+        body {
+            width: 100%;
+            height: 100vh;
+            background: url("{{$backgroundImageDT}}") top right no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
     }
 
     /* end:: untuk background dinamis */
@@ -48,7 +58,7 @@
         right: 0;
     } */
     /* end:: untuk overlay */
-    
+
     .form-control[readonly] {
         background-color: #fff;
     }
