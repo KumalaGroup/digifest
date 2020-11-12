@@ -66,6 +66,10 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
     } */
     /* end:: untuk overlay */
 
+    .form-control[readonly] {
+        background-color: #fff;
+    }
+
     .error {
         color: red;
         padding-top: 5px;
@@ -85,9 +89,9 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             </div>
             <div class="row">
                 <div class="col-lg-7">
-                    @if(!empty($data->warna))
+                    @if(!empty($data[0]->warna))
                     <div class="owl-carousel owl-theme">
-                        @foreach ($data->warna as $v)
+                        @foreach ($data[0]->warna as $v)
                         <div class="item">
                             <div class="row portfolio-container">
                                 <div class="col-lg-12 portfolio-item">
@@ -99,12 +103,12 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                         </div>
                         @endforeach
                     </div>
-                    @if(count($data->warna)>1)<div class="text-center">
+                    @if(count($data[0]->warna)>1)<div class="text-center">
                         <div id="pilihan_warna" class="portfolio-item">
-                            @foreach ($data->warna as $v)
+                            @foreach ($data[0]->warna as $v)
                             <a class="btn_round btn-sm mx-1" data-nama="{{$v->nama_warna}}" style="background-color: #{{$v->deskripsi}}; border: 2px solid #45505b; padding: 10px 15px;cursor: pointer;">&nbsp;&nbsp;</a>
                             @endforeach
-                            <p id="nama_warna" class="mt-3">{{$data->warna[0]->nama_warna}}</p>
+                            <p id="nama_warna" class="mt-3">{{$data[0]->warna[0]->nama_warna}}</p>
                         </div>
                     </div>
                     @endif
@@ -112,7 +116,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                     <div class="row portfolio-container">
                         <div class="col-lg-12 portfolio-item">
                             <div class="zoom_img" style="background-color: transparent;">
-                                <img src="{{$baseImg.'otomotif/'.$data->detail->gambar}}" class="img-fluid" alt="">
+                                <img src="{{$baseImg.'otomotif/'.$data[0]->detail->gambar}}" class="img-fluid" alt="">
                             </div>
                         </div>
                     </div>
@@ -141,7 +145,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                                     <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
                                 </div>
                             </div>
-                            <input type="hidden" name="unit" value="{{$data->detail->id}}">
+                            <input type="hidden" name="unit" value="{{$data[0]->detail->id}}">
                             <input type="hidden" name="method" value="post">
                             <div class="phone zoom_img mt-2 px-5">
                                 <button class="btn_round btn-block" id="cart">Tambah ke Keranjang</button>
@@ -150,19 +154,25 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                                 <button class="btn_round btn-block" id="buy">Beli Sekarang</button>
                             </div>
                         </form>
+                        @if(Request::segment(1)!='hino')
+                        <br>
+                        <div class="phone zoom_img mt-2 px-5">
+                            <button class="btn_round btn-block" data-toggle="modal" data-target="#modalTestDrive">Permintaan Test Drive</button>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 portfolio-item">
                     <h3 class="resume-title"><small><strong>Mulai dari</strong></small>
-                        <span class="text-primary">IDR {{formatRupiah($data->detail->harga)}},-</span></h3>
-                    <p>{{$data->detail->deskripsi}}</p>
+                        <span class="text-primary">IDR {{formatRupiah($data[0]->detail->harga)}},-</span></h3>
+                    <p>{{$data[0]->detail->deskripsi}}</p>
                 </div>
                 <div class="col-md-12">
                     <h3 class="resume-title">Spesifikasi</h3>
                     <div class="row">
-                        @foreach($data->spesifikasi as $v)
+                        @foreach($data[0]->spesifikasi as $v)
                         <div class="col-md-6 col-lg-4 portfolio-item">
                             <div class="resume-item zoom_img">
                                 <table class="table table-condensed">
@@ -185,6 +195,46 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             </div>
         </div>
     </section>
+</div>
+
+<div class="modal fade" id="modalTestDrive" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Permintaan Test Drive</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body contact">
+                <form id="formTestDrive" class="php-email-form" style="background-color: transparent;">
+                    @csrf
+                    <input type="hidden" name="layanan" id="layanan" value="Test Drive">
+                    <div class="form-group row mb-1">
+                        <p class="col-sm-3 my-auto">Nama Lengkap</p>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" value="{{$data[1]->nama}}" required readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <p class="col-sm-3 my-auto">No. Telepon</p>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="telepon" id="telepon" placeholder="No. Telepon" value="{{$data[1]->telepon}}" required readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <p class="col-sm-3 my-auto">Kota Domisili</p>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="asalKota" id="asalKota" placeholder="Kota Domisili" required />
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Kirim Permintaan</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -234,6 +284,21 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
             }
         }
     });
+
+    $('#submit').on('click', async function(e) {
+        e.preventDefault()
+        var form = $('#formTestDrive')
+        if (form.valid()) {
+            $(this).prop('disabled', true)
+            var data = form.serialize()
+            var response = await $.post(location, data)
+            if (response.result == 'Success') {
+                alert(response.message)
+                form.trigger('reset')
+                $('#modalTestDrive').modal('hide')
+            }
+        }
+    })
 
 </script>
 @endsection

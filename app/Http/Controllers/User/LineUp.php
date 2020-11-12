@@ -24,13 +24,19 @@ class LineUp extends Backend
         if ($request->isMethod("post")) {
             foreach ($request->all() as $k => $v)
                 $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
-            $data['customer'] = $request->session()->get('id');
-            $result = post(parent::$urlApi . "digifest_cart", $data);
+            if ($request->has('layanan')) {
+                $result = post(parent::$urlApi . 'layanan', $data);
+            } else {
+                $data['customer'] = $request->session()->get('id');
+                $result = post(parent::$urlApi . "digifest_cart", $data);
+            }
             return response()->json($result);
         } else {
             $detail = urldecode($detail);
-
-            $result = get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail));
+            $result = array(
+                get(parent::$urlApi . "digifest_lineUp/{$brand}/" . reformatString($detail)),
+                get(parent::$urlApi . "digifest_profil/" . $request->session()->get('id'))
+            );
             return view('user.lineUp.detail', [
                 'sectionTitle' => $detail,
                 'backgroundImageDT' => $this->backgroundImageDT,
