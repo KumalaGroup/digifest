@@ -13,7 +13,7 @@ class Frontend extends Controller
             return $next($request);
         });
     }
-    function _cekSession()
+    private function _cekSession()
     {
         $loggedIn = session('loggedIn');
         if ($loggedIn) return redirect()->route('home')->send();
