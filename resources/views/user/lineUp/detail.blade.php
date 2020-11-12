@@ -142,23 +142,23 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                             <button class="btn_round btn-block" data-toggle="modal" data-target="#modalTestDrive">Permintaan Test Drive</button>
                         </div>
                         @endif
-                        <form id="form" class="php-email-form" style="background-color: transparent;">
-                            <div class="phone px-5">
-                                @csrf
-                                <div class="form-group row mb-0">
-                                    <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
-                                </div>
-                            </div>
-                            <input type="hidden" name="unit" value="{{$data[0]->detail->id}}">
-                            <input type="hidden" name="method" value="post">
-                            <div class="phone zoom_img mt-2 px-5">
-                                <button class="btn_round btn-block" id="cart">Tambah ke Keranjang</button>
-                            </div>
-                            <div class="phone zoom_img mt-2 px-5">
-                                <button class="btn_round btn-block" id="buy">Beli Sekarang</button>
-                            </div>
-                        </form>
                     </div>
+                    <form id="form" class="php-email-form mt-5" style="background-color: transparent;">
+                        <div class="px-5">
+                            @csrf
+                            <div class="form-group row mb-0">
+                                <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required autocomplete="off" maxlength="3" style="text-align:center;" />
+                            </div>
+                        </div>
+                        <input type="hidden" name="unit" value="{{$data[0]->detail->id}}">
+                        <input type="hidden" name="method" value="post">
+                        <div class="zoom_img mt-2 px-5">
+                            <button class="btn_round btn-block" id="cart">Tambah ke Keranjang</button>
+                        </div>
+                        <div class="zoom_img mt-2 px-5">
+                            <button class="btn_round btn-block" id="buy">Beli Sekarang</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="row">
@@ -260,9 +260,11 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         var form = $('#form');
         if (form.valid()) {
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             var data = form.serialize();
             var response = await $.post(location, data);
             $(this).prop('disabled', false);
+            $(this).html(`Tambah ke Keranjang`)
             alert(response.msg);
             if (response.status == "success") form.trigger('reset');
         }
@@ -272,9 +274,11 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         var form = $('#form');
         if (form.valid()) {
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             var data = form.serialize();
             var response = await $.post(location, data);
             $(this).prop('disabled', false);
+            $(this).html(`Beli Sekarang`)
             alert(response.msg);
             if (response.status == "success") {
                 var id = btoa(JSON.stringify([response.id]));
@@ -288,8 +292,11 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
         var form = $('#formTestDrive')
         if (form.valid()) {
             $(this).prop('disabled', true)
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             var data = form.serialize()
             var response = await $.post(location, data)
+            $(this).prop('disabled', false)
+            $(this).html(`Kirim Permintaan`)
             if (response.result == 'Success') {
                 alert(response.message)
                 form.trigger('reset')

@@ -67,6 +67,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -84,8 +85,7 @@
                             <div class="portfolio-wrap zoom_img" style="background-color: transparent;">
                                 <img src="{{empty($data->gambar)?asset('assets/img/avatar.png'):$baseImg.'customer/'.$data->gambar}}" class="img-fluid" id="profilImg" alt="">
                                 <div class="portfolio-info">
-                                    <div class="portfolio-links">
-                                        <a href="{{empty($data->gambar)?asset('assets/img/avatar.png'):$baseImg.'customer/'.$data->gambar}}" data-gall="portfolioGallery" class="venobox" title=""><i class="bx bx-image"></i></a>
+                                    <div class="portfolio-links" id="fotoProfil">
                                         <a id="avatar" href="javascript:void(0)"><i class="bx bx-image-add"></i></a>
                                     </div>
                                 </div>
@@ -165,7 +165,6 @@
                                     </div>
                                 </div>
                                 <input type="file" name="gambar" id="gambar" hidden>
-                                <input type="hidden" name="id" value="{{$data->id}}">
                                 <div class="form-group text-center">
                                     <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Ubah</button></div>
                                 </div>
@@ -186,7 +185,6 @@
                                         <input type="password" class="form-control" name="rePassword" id="rePassword" placeholder="Ulangi Password" required minlength="6" />
                                     </div>
                                 </div>
-                                <input type="hidden" name="id" value="{{$data->id}}">
                                 <div class="form-group text-center">
                                     <div class="zoom_img mt-4 mb-4"><button id="submitPass" class="btn_round">Ubah</button></div>
                                 </div>
@@ -204,10 +202,10 @@
 @section('js')
 <script>
     $(`#tanggal_lahir`).datepicker({
-        format: `dd-mm-yyyy`,
-        startView: 2,
-        autoclose: true,
-        startDate: new Date('1970-01-01')
+        format: `dd-mm-yyyy`
+        , startView: 2
+        , autoclose: true
+        , startDate: new Date('1970-01-01')
     });
     $(`#tanggal_lahir`).datepicker(`update`, `{{tgl_sql($data->tanggal_lahir)}}`);
     $(`#agama`).val(`{{$data->agama}}`);
@@ -219,8 +217,10 @@
         if (form.valid()) {
             var data = form.serialize();
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             $.post(location, data, function(data, textStatus, jqXHR) {
                 $('#submit').prop('disabled', false);
+                $('#submit').html('Ubah')
                 alert(data.msg);
             }, "json");
         }
@@ -235,21 +235,22 @@
                 return false;
             }
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             $.post(location, data, function(data, textStatus, jqXHR) {
                 $('#submitPass').prop('disabled', false);
+                $('#submitPass').html('Ubah')
                 alert(data.msg);
                 if (data.status == "success") $('#formPass').trigger('reset');
             }, "json");
         }
     });
 
-    $('#avatar').click(function() {
+    $('#fotoProfil').on('click', '#avatar', function() {
         $('#gambar').click();
     });
     $('#gambar').change(function() {
         var formData = new FormData();
         formData.append('_token', '{{csrf_token()}}');
-        formData.append('id', '{{$data->id}}');
         var gambar = $('#gambar')[0].files[0];
         var allowed_types = ["jpg", "jpeg", "png"];
         var ext = gambar.name.split(".").pop().toLowerCase();
@@ -262,18 +263,23 @@
             alert("Ukuran file melebihi 500kB");
             return false;
         }
+        $('#fotoProfil').html(`<i class='bx bx-loader bx-spin'></i>`)
         $.ajax({
-            type: 'post',
-            url: location,
-            data: formData,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function(response) {
+            type: 'post'
+            , url: location
+            , data: formData
+            , processData: false
+            , contentType: false
+            , dataType: 'json'
+            , success: function(response) {
                 alert(response.msg);
+                $('#fotoProfil').html(
+                    `<a id="avatar" href="javascript:void(0)"><i class="bx bx-image-add"></i></a>`
+                );
                 if (response.status == "success") $('#profilImg').attr('src', `{{$baseImg}}customer/` + response.img);
             }
         });
     });
+
 </script>
 @endsection

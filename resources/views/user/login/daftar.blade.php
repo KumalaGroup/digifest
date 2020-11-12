@@ -101,8 +101,10 @@
                 return false;
             }
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             $.post(location, data, function(data, textStatus, jqXHR) {
                 $('#submit').prop('disabled', false);
+                $('#submit').html('Daftar')
                 alert(data.msg);
                 if (data.status == "success") location.replace("{{route('login')}}");
             }, "json");

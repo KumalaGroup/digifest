@@ -104,11 +104,13 @@
         var data = form.serialize();
         if ($('#form').valid()) {
             $(this).prop('disabled', true);
+            $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
             var response = await $.post(location, data);
             if (response.status == "success") location.reload();
             else {
                 alert(response.msg);
                 $(this).prop('disabled', false);
+                $(this).html('Masuk')
             }
         }
     });

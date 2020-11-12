@@ -27,12 +27,15 @@ class Home extends Backend
             if ($request->hasFile('gambar')) {
                 $file = $request->gambar;
                 $fileName = date("dmYHis") . '.' . $file->getClientOriginalExtension();
-                $result = post(parent::$urlApi . "digifest_profil", ['id' => $request->id, 'gambar' => $fileName]);
+                $result = post(parent::$urlApi . "digifest_profil", ['id' => $request->session()->get('id'), 'gambar' => $fileName]);
                 if ($result->status === "success") $request->gambar->move('../assets/img_marketing/customer', $fileName);
             } else {
                 foreach ($request->all() as $k => $v)
                     $data[$k] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', strip_tags($v));
-                $data['tanggal_lahir'] = tgl_sql($data['tanggal_lahir']);
+                if (isset($data['tanggal_lahir'])) {
+                    $data['tanggal_lahir'] = tgl_sql($data['tanggal_lahir']);
+                }
+                $data['id'] = $request->session()->get('id');
                 $result = post(parent::$urlApi . "digifest_profil", $data);
             }
             return response()->json($result);

@@ -158,6 +158,7 @@
         else {
             if ($('#form').valid()) {
                 $(this).prop('disabled', true);
+                $(this).html(`<i class='bx bx-loader bx-spin'></i>`)
                 var response = await $.ajax({
                     type: 'post'
                     , url: location
@@ -166,6 +167,7 @@
                     , contentType: false
                 });
                 $(this).prop('disabled', false);
+                $(this).html(`Konfirmasi`)
                 alert(response.msg);
                 if (response.status == "success") {
                     location.replace(`{{route('transaksi')}}`);
