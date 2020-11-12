@@ -136,8 +136,12 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                                 <h4 style="padding-top: 10px;">Test Drive Virtual</h4>
                             </a>
                         </div>
+                        @if(Request::segment(1)!='hino')
                         <br>
-
+                        <div class="phone zoom_img mt-2 px-5">
+                            <button class="btn_round btn-block" data-toggle="modal" data-target="#modalTestDrive">Permintaan Test Drive</button>
+                        </div>
+                        @endif
                         <form id="form" class="php-email-form" style="background-color: transparent;">
                             <div class="phone px-5">
                                 @csrf
@@ -154,12 +158,6 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                                 <button class="btn_round btn-block" id="buy">Beli Sekarang</button>
                             </div>
                         </form>
-                        @if(Request::segment(1)!='hino')
-                        <br>
-                        <div class="phone zoom_img mt-2 px-5">
-                            <button class="btn_round btn-block" data-toggle="modal" data-target="#modalTestDrive">Permintaan Test Drive</button>
-                        </div>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -229,7 +227,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                         </div>
                     </div>
                     <div class="form-group text-center">
-                        <div class="zoom_img mt-4 mb-4"><button id="submit" class="btn_round">Kirim Permintaan</button></div>
+                        <div class="zoom_img mt-4"><button id="submit" class="btn_round">Kirim Permintaan</button></div>
                     </div>
                 </form>
             </div>
