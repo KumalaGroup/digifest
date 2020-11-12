@@ -38,7 +38,7 @@
 
     @yield('content')
 
-    @if(!Route::has(array('login','daftar')))
+    @if(!in_array(Route::current()->getName(),array('login','daftar')))
     <footer id="footer" style="background-color: white;">
         <div class="container mt-3">
             <div class="row">
