@@ -56,12 +56,9 @@
 @section('content')
 <div class="row h-100 m-0 p-0">
     <section id="contact" class="contact col-md-12 mt-auto">
-        <div class="container" data-aos="zoom-in" data-aos-delay="100">
+        <div class="container" data-aos="zoom-in" data-aos-delay="100" style="padding-top: 150px;">
             <div class="row">
                 <div class="col-sm-8 col-md-6 col-lg-4 mx-sm-auto mx-md-0">
-                    <div class="section-title">
-                        <h2>Masuk</h2>
-                    </div>
                     <form id="form" class="php-email-form" style="background-color: transparent;">
                         @csrf
                         <div class="form-group mb-1">
