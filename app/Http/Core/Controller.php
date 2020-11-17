@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public static $urlApi = "http://portal.kumalagroup.co.id/kmg/api/tHLxW586aIi1YXsQeEKBwhPOJzqfjFokybGmCgRN0M4cnlvduTrVAU2pZS9D37/";
+    public static $urlApi = "http://portal2.kumalagroup.co.id/kmg/api/tHLxW586aIi1YXsQeEKBwhPOJzqfjFokybGmCgRN0M4cnlvduTrVAU2pZS9D37/";
     public static $baseImg = "https://kumalagroup.id/assets/img_marketing/";
     // public static $urlApi = "http://localhost:6424/kmg/api/tHLxW586aIi1YXsQeEKBwhPOJzqfjFokybGmCgRN0M4cnlvduTrVAU2pZS9D37/";
     // public static $baseImg = "http://localhost:6424/kumalagroup/assets/img_marketing/";
