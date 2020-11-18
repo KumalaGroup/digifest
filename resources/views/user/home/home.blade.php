@@ -60,6 +60,7 @@
     #tanggal {
         cursor: pointer;
     }
+
 </style>
 @endsection
 
@@ -69,7 +70,7 @@
     <section id="resume" class="resume portfolio">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <div class="section-title">
-                <h2>Kumala Digifest</h2>
+                <h2>Main Stage</h2>
             </div>
 
             <div class="row">
@@ -188,27 +189,27 @@
 @section('js')
 <script>
     $.fn.datepicker.dates['id'] = {
-        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"],
-        months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"],
-        monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
-        today: "Today",
-        clear: "Clear",
-        format: "mm/dd/yyyy",
-        titleFormat: "MM yyyy",
-        weekStart: 0
+        days: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , daysShort: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , daysMin: ["Ahad&nbsp;", "Senin&nbsp;", "Selasa&nbsp;", "Rabu&nbsp;", "Kamis&nbsp;", "Jum'at&nbsp;", "Sabtu"]
+        , months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "Desember"]
+        , monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"]
+        , today: "Today"
+        , clear: "Clear"
+        , format: "mm/dd/yyyy"
+        , titleFormat: "MM yyyy"
+        , weekStart: 0
     };
     $('#tanggal').datepicker({
-        format: `yyyy-mm-dd`,
-        autoclose: true,
-        language: `id`,
-        todayHighlight: true
+        format: `yyyy-mm-dd`
+        , autoclose: true
+        , language: `id`
+        , todayHighlight: true
     }).on("changeDate", function(e) {
         $('#tanggal').html(formatHariTanggal(e.date));
         $.get(location, {
-            rundown: true,
-            date: formatDate(e.date)
+            rundown: true
+            , date: formatDate(e.date)
         }, function(data, textStatus, jqXHR) {
             $('#rundown').children().remove();
             if (!isEmpty(data))
@@ -225,8 +226,8 @@
     });
     $('#tanggal').html(formatHariTanggal(new Date()));
     $.get(location, {
-        rundown: true,
-        date: formatDate(new Date())
+        rundown: true
+        , date: formatDate(new Date())
     }, function(data, textStatus, jqXHR) {
         $('#rundown').children().remove();
         if (!isEmpty(data))
@@ -248,5 +249,6 @@
         }
         return true;
     }
+
 </script>
 @endsection
