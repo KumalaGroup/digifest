@@ -69,6 +69,7 @@
         margin: 0;
         font-size: 10pt;
     }
+
 </style>
 @endsection
 
@@ -94,7 +95,7 @@
                                         <tr>
                                             <td width="200">Tanggal</td>
                                             <td width="20">:</td>
-                                            <td id="tanggal"></td>
+                                            <td id="tanggal">{{$data->detail->created_at}}</td>
                                         </tr>
                                         <tr>
                                             <td width="200">Nama Lengkap</td>
@@ -240,9 +241,11 @@
 
 @section('js')
 <script>
-    $('#tanggal').html(formatHariTanggal(new Date('{{$data->detail->created_at}}')));
+    var formattedDate = formatHariTanggal(new Date('{{$data->detail->created_at}}'));
+    $('#tanggal').html(formattedDate);
     $('#confirm').on('click', function() {
         location.replace(`{{route('transaksiConfirm')}}?kdinvdg={{Request::get('kdinvdg')}}`);
     });
+
 </script>
 @endsection
