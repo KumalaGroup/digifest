@@ -143,8 +143,10 @@
                                                 <a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>
                                                 @elseif($data->detail->status==1)
                                                 <a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>
-                                                @else
+                                                @elseif($data->detail->status==2)
                                                 <a href="javascript:void(0)" class="badge badge-success">Terverifikasi</a>
+                                                @else
+                                                <a href="javascript:void(0)" class="badge badge-danger">Verifikasi gagal</a>
                                                 @endif
                                             </td>
                                         </tr>

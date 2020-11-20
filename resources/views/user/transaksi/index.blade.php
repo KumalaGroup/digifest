@@ -71,6 +71,7 @@
     #tabelRiwayat tr:hover {
         cursor: pointer;
     }
+
 </style>
 @endsection
 
@@ -155,9 +156,9 @@
     $('tbody').on('click', '.hapus', async function() {
         if (confirm('Apakah anda yakin? Data akan dihapus')) {
             var response = await $.post(location, {
-                _token: '{{csrf_token()}}',
-                id: $(this).data('id'),
-                method: 'delete'
+                _token: '{{csrf_token()}}'
+                , id: $(this).data('id')
+                , method: 'delete'
             });
             if (response.status == 'success') {
                 alert(response.msg);
@@ -226,16 +227,16 @@
         if (jumlah_temp[index] == 0) {
             if (confirm('Apakah anda yakin? Data akan dihapus'))
                 response = await $.post(location, {
-                    _token: '{{csrf_token()}}',
-                    id: $(this).data('id'),
-                    method: 'delete'
+                    _token: '{{csrf_token()}}'
+                    , id: $(this).data('id')
+                    , method: 'delete'
                 });
             else return false;
         } else response = await $.post(location, {
-            _token: '{{csrf_token()}}',
-            unit: $(this).data('unit'),
-            jumlah: jumlah_temp[index],
-            method: 'post'
+            _token: '{{csrf_token()}}'
+            , unit: $(this).data('unit')
+            , jumlah: jumlah_temp[index]
+            , method: 'post'
         });
         if (response.status == 'success') {
             alert(response.msg);
@@ -264,61 +265,63 @@
     });
 
     var datatable = $('#tabelRiwayat').DataTable({
-        processing: true,
-        serverSide: true,
-        order: [],
-        responsive: true,
-        language: {
+        processing: true
+        , serverSide: true
+        , order: []
+        , responsive: true
+        , language: {
             search: 'No. Transaksi :'
-        },
-        ajax: {
-            type: 'post',
-            url: location,
-            data: function(data) {
+        }
+        , ajax: {
+            type: 'post'
+            , url: location
+            , data: function(data) {
                 data.datatable = true;
                 data._token = '{{csrf_token()}}'
             }
-        },
-        columns: [{
-            data: null,
-            title: 'No',
-            width: 35,
-            orderable: false,
-            render: function(data, type, row, meta) {
+        }
+        , columns: [{
+            data: null
+            , title: 'No'
+            , width: 35
+            , orderable: false
+            , render: function(data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
-            },
-        }, {
-            data: 'kode',
-            title: 'No. Transaksi',
-        }, {
-            data: 'item',
-            title: 'Jumlah',
-        }, {
-            data: null,
-            title: 'Uang Tanda Jadi',
-            searchable: false,
-            render: function(data, type, row, meta) {
+            }
+        , }, {
+            data: 'kode'
+            , title: 'No. Transaksi'
+        , }, {
+            data: 'item'
+            , title: 'Jumlah'
+        , }, {
+            data: null
+            , title: 'Uang Tanda Jadi'
+            , searchable: false
+            , render: function(data, type, row, meta) {
                 var uangMuka = '';
                 if (data.uangMuka != data.potongan) {
                     uangMuka = `<small style="color:#dc3545"><strike>IDR ` + data.uangMuka + `,-</strike></small> `
                 }
                 return uangMuka + `IDR ` + data.potongan + `,-`;
-            },
-        }, {
-            data: null,
-            title: 'Status Pembayaran',
-            searchable: false,
-            render: function(data, type, row, meta) {
+            }
+        , }, {
+            data: null
+            , title: 'Status Pembayaran'
+            , searchable: false
+            , render: function(data, type, row, meta) {
                 if (data.status == 0) {
                     return `<a href="javascript:void(0)" class="badge badge-warning">Tertunda</a>`
                 } else if (data.status == 1) {
                     return `<a href="javascript:void(0)" class="badge badge-info">Menunggu verifikasi</a>`
-                } else {
+                } else if (data.status == 2) {
                     return `<a href = "javascript:void(0)" class="badge badge-success">Terverifikasi</a>`
+                } else {
+                    return `<a href = "javascript:void(0)" class="badge badge-danger">Verifikasi gagal</a>`
                 }
-            },
-        }, ],
-    });
+            }
+        , }, ]
+    , });
 
     $('#tabelRiwayat').on('click', 'tr', function() {
         var inv = $(this).find('td').eq(1);
@@ -327,5 +330,6 @@
             location.replace(`{{route('transaksiRiwayat')}}?kdinvdg=` + data);
         }
     });
+
 </script>
 @endsection
