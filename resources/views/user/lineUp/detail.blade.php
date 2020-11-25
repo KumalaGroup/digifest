@@ -208,6 +208,7 @@ $uri = strpos($uri,'%2F')?str_replace('%2F','%252F',$uri):$uri;
                 <form id="formTestDrive" class="php-email-form" style="background-color: transparent;">
                     @csrf
                     <input type="hidden" name="layanan" id="layanan" value="Test Drive">
+                    <input type="hidden" name="unit" value="{{$data[0]->detail->id}}">
                     <div class="form-group row mb-1">
                         <p class="col-sm-3 my-auto">Nama Lengkap</p>
                         <div class="col-sm-9">
